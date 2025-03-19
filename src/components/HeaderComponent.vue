@@ -1,22 +1,22 @@
-<script>
-import BaseIcon from './BaseIcon.vue';
-</script>
-
 <template>
-    <header class="bg-white h-32 flex flex-row ">
+    <header class="flex justify-center items-center p-6 bg-white text-black">
         <div class="basis-3xs">
             <img src="@/assets/cyber-logo-black.svg" alt="">
         </div>
-        <div class="basis-3xs">
-            <p>Barra de navegação</p>
+        <div class="basis-3xs h-auto">
+            <input class="bg-gray-200  w-auto rounded-xl p-2 placeholder:text-black" placeholder="Search for a Product"
+                type="text" name="search" />
         </div>
-        <div class="basis-3xs">
-            <p>links de navegação</p>
+        <div class="basis-3xs flex gap-4">
+            <router-link to="">Home</router-link>
+            <router-link to="">About</router-link>
+            <router-link to="">Contact Us</router-link>
+            <router-link to="">Blog</router-link>
         </div>
-        <div class="basis-3xs">
-            <BaseIcon category="actions" name="Favorites" size="24px" color="red" />
-            <BaseIcon category="actions" name="Favorites" size="24px" color="red" />
-            <BaseIcon category="actions" name="Favorites" size="24px" color="red" />
+        <div class="basis-3xs flex flex-row w-8 h-8 gap-8">
+            <img src="@/components/icons/actions/Favorites.svg">
+            <img src="@/components/icons/actions/Cart.svg">
+            <img src="@/components/icons/actions/User.svg">
         </div>
     </header>
 </template>
