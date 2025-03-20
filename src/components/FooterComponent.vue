@@ -9,10 +9,10 @@
             <div class="flex flex-col">
                 <h3 class="text-white text-2xl">Services</h3>
                 <ul class="space-y-2 text-gray-400 text-xl">
-                    <li><a href="#">Bonus program</a></li>
-                    <li><a href="#">Gift cards</a></li>
-                    <li><a href="#">Credit and Payment</a></li>
-                    <li><a href="#">Services Contracts</a></li>
+                    <li><a>Bonus program</a></li>
+                    <li><a>Gift cards</a></li>
+                    <li><a>Credit and Payment</a></li>
+                    <li><a>Services Contracts</a></li>
                     <li><a href="">Non-cash account</a></li>
                     <li><a href="">Payment</a></li>
                 </ul>
@@ -20,12 +20,12 @@
             <div class="flex flex-col">
                 <h3 class="text-white text-2xl">Assistance to the Buyer</h3>
                 <ul class="space-y-2 text-gray-400 text-xl">
-                    <li><a href="#">Find an order</a></li>
-                    <li><a href="#">Terms of delivery</a></li>
-                    <li><a href="#">Exchange and return of goods</a></li>
-                    <li><a href="#">Guarantee</a></li>
-                    <li><a href="">Frequently asked questions</a></li>
-                    <li><a href="">Terms of use of the site</a></li>
+                    <li><a>Find an order</a></li>
+                    <li><a>Terms of delivery</a></li>
+                    <li><a>Exchange and return of goods</a></li>
+                    <li><a>Guarantee</a></li>
+                    <li><a>Frequently asked questions</a></li>
+                    <li><a>Terms of use of the site</a></li>
                 </ul>
             </div>
         </div>

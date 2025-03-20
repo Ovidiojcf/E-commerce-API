@@ -1,7 +1,7 @@
 <template>
-    <header class="flex justify-center gap-8 p-6 bg-white text-black text-xl xl:flex justify-center">
+    <header class="w-full flex justify-center gap-8 p-6 bg-white text-black text-xl xl:flex">
         <div>
-            <img  class="w-30" src="@/assets/cyber-logo-black.svg" alt="">
+            <img class="w-30" src="@/assets/cyber-logo-black.svg" alt="">
         </div>
         <div class=" h-auto">
             <input class="bg-gray-200  w-auto rounded-xl p-2 placeholder:text-black" placeholder="Search for a Product"
