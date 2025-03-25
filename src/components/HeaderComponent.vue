@@ -48,7 +48,7 @@ const auth = useAuthStore();
                         <img src="@/components/icons/actions/Favorites.svg" alt="Favorites" class="w-6 h-6">
                     </button>
                     <button aria-label="Cart" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                        <img src="@/components/icons/actions/Cart.svg" alt="Cart" class="w-6 h-6">
+                        <router-link to="/cart" class="hover:text-indigo-600 transition-colors"><img src="@/components/icons/actions/Cart.svg" alt="Cart" class="w-6 h-6"></router-link>
                     </button>
                     <div class="flex items-center gap-2">
                         <button aria-label="User Profile" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
