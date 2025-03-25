@@ -1,7 +1,11 @@
 <script setup>
 import { Login } from '@/services/HttpService';
+import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const auth = useAuthStore();
+const router = useRouter();
 // Estado para controlar qual formulário mostrar
 const isLoginForm = ref(true);
 
@@ -19,20 +23,16 @@ function toggleForm() {
   name.value = '';
 }
 
-async function handleSubmit() {
-  if (isLoginForm.value) {
-    // Lógica de login
-    const result = await Login({ email: email.value, password: password.value });
-    if (result.status === 200) {
-      return 1;
-    } else {
-      alert('Login falhou');
-    }
+async function enviar() {
+  const result = await Login({ email: email.value, password: password.value });
+  console.log(result)
+
+  if (result.status === 200) {
+    router.push('/home');
+    alert('Login sucesso')
+    auth.saveUser(result.data)
   } else {
-    // Lógica de cadastro (você precisará implementar o serviço de cadastro)
-    alert(`Cadastro: Nome: ${name.value}, Email: ${email.value}, Senha: ${password.value}`);
-    // Após cadastro bem-sucedido, você pode voltar para o formulário de login
-    // isLoginForm.value = true;
+    alert('Login falhou');
   }
 }
 </script>
@@ -60,7 +60,7 @@ async function handleSubmit() {
         </h2>
       </div>
       <div class="mt-10 w-auto">
-        <form class="space-y-6" @submit.prevent="handleSubmit">
+        <form class="space-y-6" @submit.prevent="enviar">
           <!-- Campo Nome (apenas para cadastro) -->
           <div v-if="!isLoginForm">
             <label for="name" class="block text-sm/6 font-medium text-gray-900">Full name</label>
