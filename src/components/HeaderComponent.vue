@@ -59,7 +59,7 @@ const auth = useAuthStore();
                             <img src="@/components/icons/actions/User.svg" alt="User" class="w-6 h-6">
                         </button>
 
-                        <span v-if="auth.user?.name" class="hidden md:block text-lg !font-semibold">
+                        <span v-if="auth.user" class="hidden md:block text-lg !font-semibold">
                             {{ auth.user.name }}
                         </span>
 
@@ -68,13 +68,15 @@ const auth = useAuthStore();
                             class="absolute right-0 top-12 bg-white shadow-lg rounded-md w-48 hidden">
                             <ul class="py-2 text-gray-800">
                                 <li>
-                                    <a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+                                    <a href="/" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                                 </li>
                                 <li>
-                                    <a href="/settings" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+                                    <a v-if="auth.user?.name" href="/moderator"
+                                        class="block px-4 py-2 hover:bg-gray-100">Moderator</a>
                                 </li>
                                 <li>
-                                    <button @click="auth.logout" class="block px-4 py-2 hover:bg-red-100 text-red-600">Logout</button>
+                                    <button @click="auth.logout"
+                                        class="block px-4 py-2 hover:bg-red-100 text-red-600">Logout</button>
                                 </li>
                             </ul>
                         </div>
