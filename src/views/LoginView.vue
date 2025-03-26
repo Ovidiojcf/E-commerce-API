@@ -1,5 +1,5 @@
 <script setup>
-import { Login } from '@/services/HttpService';
+import { Login, Register } from '@/services/HttpService';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -24,15 +24,41 @@ function toggleForm() {
 }
 
 async function enviar() {
-  const result = await Login({ email: email.value, password: password.value });
-  console.log(result)
-
-  if (result.status === 200) {
-    router.push('/home');
-    alert('Login sucesso')
-    auth.saveUser(result.data)
-  } else {
-    alert('Login falhou');
+  try {
+    if (isLoginForm.value) {
+      // Lógica de login (já implementada)
+      const result = await Login({ email: email.value, password: password.value });
+      
+      if (result.status === 200) {
+        router.push('/home');
+        alert('Login sucesso');
+        auth.saveUser(result.data);
+      } else {
+        alert('Login falhou');
+      }
+    } else {
+      // Lógica de registro
+      const result = await Register({ 
+        name: name.value,
+        email: email.value, 
+        password: password.value 
+      });
+      
+      if (result.status === 201 || result.status === 200) {
+        alert('Registro realizado com sucesso!');
+        //Fazer login automaticamente após o registro
+        const loginResult = await Login({ email: email.value, password: password.value });
+        if (loginResult.status === 200) {
+          router.push('/home');
+          auth.saveUser(loginResult.data);
+        }
+      } else {
+        alert('Falha no registro: ' + (result.data?.message || 'Erro desconhecido'));
+      }
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    alert('Ocorreu um erro: ' + (error.message || 'Erro desconhecido'));
   }
 }
 </script>

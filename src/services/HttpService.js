@@ -14,3 +14,13 @@ export async function Login(payload) {
         throw error;
     }
 }
+
+export async function Register(payload) {
+    try {
+        const response = await api.post('register',payload);
+        return response;
+    } catch (error) {
+        console.error('Error ao cadastrar o usuário', error);
+        throw error;
+    }
+}
