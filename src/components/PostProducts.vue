@@ -38,7 +38,26 @@ function clearImage(){
 <template>
     <Header></Header>
     <section class="flex flex-row p-20 gap-5">
-        <div class="flex flex-col gap-4 w-full max-w-md">
+
+        <!-- Upload de Arquivo -->
+        <div class="flex flex-col gap-4 w-full max-w-sm">
+            <label class="!font-bold text-lg text-gray-700">Product Image:</label>
+            <FileDrop 
+                @upload="handleFileUpload()"
+                @clear="clearImage()">
+            </FileDrop>
+            <!-- Botão de Envio -->
+            <div class="flex justify-center">
+                <button 
+                @click="sendProduct()"
+                @clear="clearFile()" 
+                class="w-auto h-auto flex justify-center text-lg rounded-md bg-indigo-600 px-3 py-3  font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Create Product
+            </button>
+            </div>
+        </div>
+        
+        <div class="flex flex-col gap-4 w-full max-w-sm">
             <!-- Campo Nome -->
             <div class="flex flex-col gap-2">
                 <label class="!font-bold text-lg text-gray-700">Name: </label>
@@ -89,21 +108,7 @@ function clearImage(){
             </div>
         </div>
         
-        <!-- Upload de Arquivo -->
-        <div class="flex flex-col gap-2">
-            <label class="!font-bold text-lg text-gray-700">Product Image:</label>
-            <FileDrop 
-                @upload="handleFileUpload()"
-                @clear="clearImage()">
-            </FileDrop>
-        </div>
         
-        <!-- Botão de Envio -->
-        <button 
-            @click="sendProduct()"
-            @clear="clearFile()" 
-            class="w-auto h-12 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Create Product
-        </button>
+        
     </section>
 </template>
