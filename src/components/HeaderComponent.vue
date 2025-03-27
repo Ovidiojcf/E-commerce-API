@@ -28,17 +28,17 @@ const auth = useAuthStore();
                 <nav class="mt-4 md:mt-0">
                     <ul class="flex items-center gap-6">
                         <li>
-                            <router-link to="/" class="hover:text-indigo-600 transition-colors">Home</router-link>
+                            <router-link to="/home" class="hover:text-indigo-600 transition-colors">Home</router-link>
                         </li>
                         <li>
                             <router-link to="/login" class="hover:text-indigo-600 transition-colors">Login</router-link>
                         </li>
                         <li>
-                            <router-link to="/contact" class="hover:text-indigo-600 transition-colors">Contact
+                            <router-link to="/home" class="hover:text-indigo-600 transition-colors">Contact
                                 Us</router-link>
                         </li>
                         <li>
-                            <router-link to="/blog" class="hover:text-indigo-600 transition-colors">Blog</router-link>
+                            <router-link to="/home" class="hover:text-indigo-600 transition-colors">Blog</router-link>
                         </li>
                     </ul>
                 </nav>
@@ -71,7 +71,7 @@ const auth = useAuthStore();
                                     <a href="/" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                                 </li>
                                 <li>
-                                    <a v-if="auth.user?.name" href="/moderator"
+                                    <a v-if="auth.user?.role === 'ADMIN'" href="/moderator"
                                         class="block px-4 py-2 hover:bg-gray-100">Moderator</a>
                                 </li>
                                 <li>
