@@ -11,7 +11,7 @@ export const useCreateProducts = defineStore('products', () =>{
     const price = ref(0)
     const stock = ref(0)
     const category_id = ref('0')
-    const img = ref('')
+    const image = ref('')
 
     function getFormData(){
         const formData = new FormData();
@@ -20,18 +20,20 @@ export const useCreateProducts = defineStore('products', () =>{
         formData.append('price', price.value);
         formData.append('stock', stock.value);
         formData.append('category_id', category_id.value);
-        formData.append('img', img.value);
+        formData.append('image', image.value);
 
         return formData;
     }
 
-    async function createProductForm(params) {
+    async function createProductForm() {
         try {
             const formData = getFormData();
             const data = await createProduct(formData);
+            return data;
         } catch (error) {
             console.error("Erro ao criar produto:", JSON.stringify(error.response?.data, null, 2));
         }
+        
     }
 
     return {
@@ -40,7 +42,7 @@ export const useCreateProducts = defineStore('products', () =>{
         price,
         stock,
         category_id,
-        img,
+        image,
         createProductForm
     }
 

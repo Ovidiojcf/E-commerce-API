@@ -6,10 +6,11 @@ const products = useCreateProducts();
 
 
 async function sendProduct() {
-    const result = await products.createProductForm;
-
-    if (result.status === 201) {
+    const result = await products.createProductForm();
+    console.log(result);
+    if (result) {
         alert('Produto Cadastrado com sucesso');
+        clearFile();
     } else {
         alert('Cadastro de produto falhou');
     }
@@ -17,16 +18,21 @@ async function sendProduct() {
 
 function handleFileUpload(file) {
     if (file) {
-        products.img = file;
+        products.image = file;
         console.log("arquivo selecionado", file);
     }
 }
 
 function clearFile() {
-    products.img = null;
-    console.log("arquivo removido");
+    products.name = ('');
+    products.description = ('');
+    products.price = (0);
+    products.stock = (0);
+    products.category_id = (0);
 }
-
+function clearImage(){
+    products.image = null;
+}
 </script>
 
 <template>
@@ -88,13 +94,14 @@ function clearFile() {
             <label class="!font-bold text-lg text-gray-700">Product Image:</label>
             <FileDrop 
                 @upload="handleFileUpload()"
-                @clear="clearFile()">
+                @clear="clearImage()">
             </FileDrop>
         </div>
         
         <!-- Botão de Envio -->
         <button 
-            @click="sendProduct()" 
+            @click="sendProduct()"
+            @clear="clearFile()" 
             class="w-auto h-12 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Create Product
         </button>

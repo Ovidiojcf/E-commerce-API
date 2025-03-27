@@ -37,6 +37,7 @@ export async function createProduct(product) {
 
             }
         });
+        return response.data;
     } catch (error) {
         console.error('Error ao cadastrar o produto: ',error);
         throw error;

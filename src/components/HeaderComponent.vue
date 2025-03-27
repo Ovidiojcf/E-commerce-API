@@ -71,7 +71,7 @@ const auth = useAuthStore();
                                     <a href="/" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                                 </li>
                                 <li>
-                                    <a v-if="auth.user?.role === 'ADMIN'" href="/moderator"
+                                    <a v-if="auth.user?.role == 'ADMIN'" href="/moderator"
                                         class="block px-4 py-2 hover:bg-gray-100">Moderator</a>
                                 </li>
                                 <li>
