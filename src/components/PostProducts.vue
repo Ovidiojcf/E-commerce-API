@@ -38,7 +38,6 @@ function clearImage(){
 <template>
     <Header></Header>
     <section class="flex flex-row p-20 gap-5">
-
         <!-- Upload de Arquivo -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
             <label class="!font-bold text-lg text-gray-700">Product Image:</label>

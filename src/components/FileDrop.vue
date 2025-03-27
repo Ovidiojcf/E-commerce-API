@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full min-h-[200px]">
+    <div class="w-full h-full min-h-[100px]">
         <label v-bind="$attrs"
             class="relative transition-all ease-in-out duration-300 border-2 border-dashed border-gray-400 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer"
             :class="[entering ? 'bg-gray-200' : 'bg-gray-50', previewUrl ? 'border-indigo-500 bg-white' : '']"
