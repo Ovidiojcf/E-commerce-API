@@ -16,23 +16,16 @@ onMounted(async () => {
     await store.getProductsStore();
     allProducts.value = store.products;
     console.log("Resposta da API:", allProducts);
-
-    // Adicionar a URL completa da imagem para cada produto
-    allProducts.value = allProducts.value.map(product => ({
-        ...product,
-        fullImageUrl: getImg(product.image) // Aplicar a função getImg para cada imagem
-    }));
 })
 
 </script>
 
 <template>
-    <section class="bg-white py-12 px-4">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-8 text-center">Produtos em Destaque</h2>
+    <section class="bg-white p-10">
+        <div class="">
             <!-- Products grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <ProductComponent v-for="product in allProducts" :key="product.id" :imageUrl="product.fullImageUrl"
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 content-center gap-6 ">
+                <ProductComponent v-for="product in allProducts" :key="product.id" :imageUrl="getImg(product.image_path)"
                     :name="product.name" :price="product.price" :description="product.description" />
             </div>
         </div>
