@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { createProduct } from '@/services/HttpService';
+import { createProduct, getProducts } from '@/services/HttpService';
 
 
 // é necessário utilizar os forms do JS e consumilo na função, após exportamos o a função para utilizala na UI.
@@ -29,6 +29,10 @@ export const useCreateProducts = defineStore('products', () =>{
         try {
             const formData = getFormData();
             const data = await createProduct(formData);
+            console.log("FormData entries:");
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + (pair[1] instanceof File ? pair[1].name : pair[1]));
+            }
             return data;
         } catch (error) {
             console.error("Erro ao criar produto:", JSON.stringify(error.response?.data, null, 2));
@@ -46,4 +50,19 @@ export const useCreateProducts = defineStore('products', () =>{
         createProductForm
     }
 
-})
+});
+
+// 'getProducts' é o nome do estado/objeto dado no pinia
+export const useGetProducts = defineStore('getProducts', () =>{
+    const products = ref([]);
+
+    async function getProductsStore() {
+        try {
+            const data = await getProducts();
+            products.value = data;
+        } catch (error) {
+            console.error("Error ao consumir a função GET" + error)
+        }
+    }
+    return {products, getProductsStore};
+});

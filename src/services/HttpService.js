@@ -26,6 +26,15 @@ export async function Register(payload) {
     }
 }
 
+export async function getProducts() {
+    try {
+        const response = await api.get('/products');
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar os produtos');
+    }
+}
+
 export async function createProduct(product) {
     const authStore = useAuthStore();//pegar os dados do moderador
     const token = authStore.token; //pegar o token guardado na auth Store do Usuário

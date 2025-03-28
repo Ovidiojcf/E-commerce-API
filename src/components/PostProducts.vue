@@ -42,13 +42,13 @@ function clearImage(){
         <div class="flex flex-col gap-4 w-full max-w-sm">
             <label class="!font-bold text-lg text-gray-700">Product Image:</label>
             <FileDrop 
-                @upload="handleFileUpload()"
+                @upload="handleFileUpload"
                 @clear="clearImage()">
             </FileDrop>
             <!-- Botão de Envio -->
             <div class="flex justify-center">
                 <button 
-                @click="sendProduct()"
+                @click="sendProduct"
                 @clear="clearFile()" 
                 class="w-auto h-auto flex justify-center text-lg rounded-md bg-indigo-600 px-3 py-3  font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Create Product
