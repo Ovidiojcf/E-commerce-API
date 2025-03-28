@@ -1,5 +1,4 @@
 <script setup>
-import Header from '@/components/HeaderComponent.vue'
 import FileDrop from './FileDrop.vue';
 import { useCreateProducts } from '@/stores/product';
 const products = useCreateProducts();
@@ -36,9 +35,8 @@ function clearImage(){
 </script>
 
 <template>
-    <Header></Header>
     <section class="flex flex-row p-20 gap-5">
-        <!-- Upload de Arquivo -->
+        <!-- Upload Product's Image -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
             <label class="!font-bold text-lg text-gray-700">Product Image:</label>
             <FileDrop 

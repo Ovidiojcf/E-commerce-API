@@ -1,5 +1,5 @@
 <script setup>
-import Header from '@/components/HeaderComponent.vue'
+import Header from '@/components/HeaderComponent.vue';
 import Footer from '@/components/FooterComponent.vue';
 import ProductsGridComponent from '@/components/ProductsGridComponent.vue';
 import Hero from '@/components/HeroComponent.vue';

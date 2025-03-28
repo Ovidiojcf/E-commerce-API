@@ -1,7 +1,28 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
+const showDropdown = ref(false);
+
+const toggleDropDown = () => {
+    showDropdown.value = !showDropdown.value;
+};
+
+const closeDropdown = (event) => {
+    if (!event.target.closest("#dropdown-container")) {
+        showDropdown.value = false;
+    }
+};
+
+// Adiciona e remove o event listener corretamente
+onMounted(() => {
+    document.addEventListener("click", closeDropdown);
+});
+
+onUnmounted(() => {
+    document.removeEventListener("click", closeDropdown);
+});
 </script>
 
 <template>
@@ -53,9 +74,9 @@ const auth = useAuthStore();
                         </router-link>
                     </button>
 
-                    <div class="relative flex items-center gap-2">
+                    <div id="dropdown-container" class="relative flex items-center gap-2">
                         <!-- Botão que ativa o dropdown -->
-                        <button id="dropdown-button" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                        <button @click="toggleDropDown" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
                             <img src="@/components/icons/actions/User.svg" alt="User" class="w-6 h-6">
                         </button>
 
@@ -64,8 +85,8 @@ const auth = useAuthStore();
                         </span>
 
                         <!-- Dropdown -->
-                        <div id="dropdown-menu"
-                            class="absolute right-0 top-12 bg-white shadow-lg rounded-md w-48 hidden">
+                        <div v-show="showDropdown"
+                            class="absolute right-0 top-12 bg-white shadow-lg rounded-md w-48">
                             <ul class="py-2 text-gray-800">
                                 <li>
                                     <a href="/" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
@@ -88,20 +109,3 @@ const auth = useAuthStore();
     </header>
 </template>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const button = document.getElementById("dropdown-button");
-    const menu = document.getElementById("dropdown-menu");
-
-    button.addEventListener("click", function () {
-        menu.classList.toggle("hidden");
-    });
-
-    // Fecha o dropdown ao clicar fora
-    document.addEventListener("click", function (event) {
-        if (!button.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add("hidden");
-        }
-    });
-});
-</script>
