@@ -7,7 +7,7 @@ const allProducts = ref([]); //guardar todos os produtos
 const store = useGetProducts(); // variavel auxiliar para consumir a função da store
 
 function getImg(imagePath) {
-    const baseUrl = 'http://34.138.111.33:8000' //base url da api
+    const baseUrl = 'http://35.196.79.227:8000' //base url da api
     return `${baseUrl}${imagePath}`
 }
 
@@ -25,8 +25,9 @@ onMounted(async () => {
         <div class="">
             <!-- Products grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 content-center gap-6 ">
-                <ProductComponent v-for="product in allProducts" :key="product.id" :imageUrl="getImg(product.image_path)"
-                    :name="product.name" :price="product.price" :description="product.description" />
+                <ProductComponent v-for="product in allProducts" :key="product.id"
+                    :imageUrl="getImg(product.image_path)" :name="product.name" :price="product.price"
+                    :description="product.description" />
             </div>
         </div>
     </section>
