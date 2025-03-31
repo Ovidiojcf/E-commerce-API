@@ -2,7 +2,7 @@ import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://34.138.111.33:8000/',
+    baseURL: 'http://35.196.79.227:8000/',
 });
 
 
@@ -48,8 +48,25 @@ export async function createProduct(product) {
         });
         return response.data;
     } catch (error) {
-        console.error('Error ao cadastrar o produto: ',error);
+        console.error('Http error in create Product: ',error);
         throw error;
     }
     
+}
+
+export async function createCategory(category){
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    try {
+        const response =  await api.post('categories', category,{
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in create Category: ',error);
+        throw error;
+    }
 }

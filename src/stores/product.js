@@ -29,7 +29,6 @@ export const useCreateProducts = defineStore('products', () =>{
         try {
             const formData = getFormData();
             const data = await createProduct(formData);
-            console.log("FormData entries:");
             for (let pair of formData.entries()) {
                 console.log(pair[0] + ': ' + (pair[1] instanceof File ? pair[1].name : pair[1]));
             }

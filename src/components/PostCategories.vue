@@ -1,34 +1,34 @@
 <script setup>
 import FileDrop from './FileDrop.vue';
+import { useCreateCategories } from '@/stores/category';
 
+
+const categories = useCreateCategories();
 
 async function sendProduct() {
-    const result = await products.createProductForm();
-    console.log(result);
+    const result = await categories.createCategorieForm();
+    console.log('Resultado da API:', result);
     if (result) {
-        alert('Produto Cadastrado com sucesso');
+        alert('Categoria Cadastrada com sucesso');
         clearFile();
     } else {
-        alert('Cadastro de produto falhou');
+        alert('Cadastro de categoria falhou');
     }
 }
 
 function handleFileUpload(file) {
     if (file) {
-        products.image = file;
+        categories.image = file;
         console.log("arquivo selecionado", file);
     }
 }
 
 function clearFile() {
-    products.name = ('');
-    products.description = ('');
-    products.price = (0);
-    products.stock = (0);
-    products.category_id = (0);
+    categories.name = ('');
+    categories.description = ('');
 }
 function clearImage(){
-    products.image = null;
+    categories.image = null;
 }
 
 </script>
@@ -37,7 +37,7 @@ function clearImage(){
     <section class="flex flex-row p-20 gap-5">
         <!-- Upload Category's Image -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
-            <label class="!font-bold text-lg text-gray-700">Product Image:</label>
+            <label class="!font-bold text-lg text-gray-700">Category Image:</label>
             <FileDrop 
                 @upload="handleFileUpload"
                 @clear="clearImage()">
@@ -58,6 +58,7 @@ function clearImage(){
             <div class="flex flex-col gap-2">
                 <label class="!font-bold text-lg text-gray-700">Name: </label>
                 <input
+                    v-model="categories.name"
                     class="shadow appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Product's Category"> 
             </div>
@@ -65,6 +66,7 @@ function clearImage(){
             <div class="flex flex-col gap-2">
                 <label class="!font-bold text-lg text-gray-700">Description: </label>
                 <input
+                    v-model="categories.description"
                     class="shadow appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Categorie's description">
             </div>
