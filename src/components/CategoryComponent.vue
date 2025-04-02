@@ -5,8 +5,8 @@ import { onMounted, ref } from 'vue';
 const allCategories = ref([]);
 const store = useGetCategories();
 
-function getImgCategory(imagePath){
-    const baseUrl = 'http://35.196.79.227:8000/' //base url da api
+function getImgCategory(image_path){
+    const baseUrl = 'http://35.196.79.227:8000' //base url da api
     return `${baseUrl}${image_path}`
     }
 
@@ -25,7 +25,7 @@ onMounted(async () => {
             <div
             class="w-full gap-4 p-5 border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <div v-for="category in allCategories" :key="category.id">
-                    <img class="rounded-xl" :src="getImgCategory(category.image_path)" alt="">
+                    <img class="rounded-xl" :src="getImgCategory(category.image_path)">
                     <h3 class="mb-2 font-sans text-2xl !font-bold text-black">
                         {{ category.name }}
                     </h3>

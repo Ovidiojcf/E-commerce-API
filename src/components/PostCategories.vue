@@ -46,7 +46,7 @@ onMounted(async () =>{
     <section class="flex flex-row p-20 gap-5">
         <!-- Upload Category's Image -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
-            <label class="!font-bold text-lg text-gray-700">Category Image:</label>
+            <label class="!font-bold text-lg text-black">Category Image:</label>
             <FileDrop 
                 @upload="handleFileUpload"
                 @clear="clearImage()">
@@ -65,27 +65,32 @@ onMounted(async () =>{
         <!-- Input Categorie Data -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
             <div class="flex flex-col gap-2">
-                <label class="!font-bold text-lg text-gray-700">Name: </label>
+                <label class="!font-bold text-lg text-black">Name: </label>
                 <input
                     v-model="categories.name"
-                    class="shadow appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-64 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Product's Category"> 
             </div>
             <!-- Campo Descrição -->
             <div class="flex flex-col gap-2">
-                <label class="!font-bold text-lg text-gray-700">Description: </label>
+                <label class="!font-bold text-lg text-black">Description: </label>
                 <input
                     v-model="categories.description"
-                    class="shadow appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-64 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Categorie's description">
             </div>
         </div>
 
     </section>
-    <section>
-        <button click="listCategoriesById()" class="w-auto h-auto flex justify-center text-lg rounded-md bg-indigo-600 px-3 py-3  font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">List Categories</button>
+    <section class="flex flex-col p-20 gap-5">
+        <h2 class="!font-bold text-lg text-black">Categories already created</h2>
         <div v-for="categoriesid in categoriesById" key="categoriesById.id">
-            <h3>{{ categoriesid.name}}</h3>
+            <div class="grid cols-2">
+                    <h3 class="!font-bold text-sm text-black">Name: <a class="!font-semibold text-gray-800">{{ categoriesid.name}}</a></h3>
+                <div>
+                    <h3 class="!font-bold text-sm text-black">Description: <a class="!font-semibold text-gray-800">{{ categoriesid.description }}</a></h3>
+                </div>
+            </div>
         </div>
     </section>
 </template>
