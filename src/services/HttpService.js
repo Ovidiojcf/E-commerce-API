@@ -63,8 +63,6 @@ export async function getCategoties() {
     }
 }
 
-
-
 export async function createCategory(category){
     const authStore = useAuthStore();
     const token = authStore.token;
@@ -79,5 +77,22 @@ export async function createCategory(category){
     } catch (error) {
         console.error('Http error in create Category: ',error);
         throw error;
+    }
+}
+
+export async function editCategory(categoryId, categoryData){
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    try {
+        const response = await api.put(`categories/${categoryId}`, categoryData,{
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in edit Category: ',error);
+        throw error
     }
 }

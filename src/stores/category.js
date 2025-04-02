@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { createCategory, getCategoties } from "@/services/HttpService";
+import { createCategory, editCategory, getCategoties } from "@/services/HttpService";
 
 
 export const useCreateCategories = defineStore('categories', () => {
@@ -8,6 +8,7 @@ export const useCreateCategories = defineStore('categories', () => {
     const name = ref('');
     const description = ref('');
     const image = ref('');
+    const id = ref(null);
 
     function getFormDataCategorie(){
         const formDataCategorie = new FormData();
@@ -27,12 +28,36 @@ export const useCreateCategories = defineStore('categories', () => {
             console.error("Error ao criar a categoria", JSON.stringify(error.response?.data, null, 2)); 
         }
     }
-    
+    async function editCategoryForm() {
+        if(!id.value) return;
+
+        try {
+            const categoryData = {
+                name: name.value,
+                description: description.value
+            };
+            const data = await editCategory(id.value, categoryData);
+            return data;
+        } catch (error) {
+            console.error("Erro ao editar a categoria", JSON.stringify(error.response?.data, null, 2));
+        }
+    }
+
+    function setEditCategory(category){
+        id.value = category.id;
+        name.value = category.name;
+        description.value = category.description;
+        image.value = category.image;
+    }
+
     return{
+        id,
         name,
         description,
         image,
-        createCategorieForm
+        createCategorieForm,
+        editCategoryForm,
+        setEditCategory
     }
 })
 //função implementada para guardar os dados nas stores
