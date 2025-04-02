@@ -1,9 +1,13 @@
 <script setup>
 import FileDrop from './FileDrop.vue';
-import { useCreateCategories } from '@/stores/category';
+import { useCreateCategories, useGetCategories } from '@/stores/category';
+import { onMounted, ref } from 'vue';
 
 
 const categories = useCreateCategories();
+const categoriesById = ref([]);
+const store = useGetCategories();
+
 
 async function sendProduct() {
     const result = await categories.createCategorieForm();
@@ -30,6 +34,11 @@ function clearFile() {
 function clearImage(){
     categories.image = null;
 }
+
+onMounted(async () =>{
+    await store.getCategoriesStore();
+    categoriesById.value = store.categoriesById;
+})
 
 </script>
 
@@ -72,5 +81,11 @@ function clearImage(){
             </div>
         </div>
 
+    </section>
+    <section>
+        <button click="listCategoriesById()" class="w-auto h-auto flex justify-center text-lg rounded-md bg-indigo-600 px-3 py-3  font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">List Categories</button>
+        <div v-for="categoriesid in categoriesById" key="categoriesById.id">
+            <h3>{{ categoriesid.name}}</h3>
+        </div>
     </section>
 </template>

@@ -28,6 +28,7 @@ export const useCreateProducts = defineStore('products', () =>{
     async function createProductForm() {
         try {
             const formData = getFormData();
+
             const data = await createProduct(formData);
             for (let pair of formData.entries()) {
                 console.log(pair[0] + ': ' + (pair[1] instanceof File ? pair[1].name : pair[1]));
@@ -59,6 +60,7 @@ export const useGetProducts = defineStore('getProducts', () =>{
         try {
             const data = await getProducts();
             products.value = data;
+            
         } catch (error) {
             console.error("Error ao consumir a função GET" + error)
         }

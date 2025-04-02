@@ -54,6 +54,17 @@ export async function createProduct(product) {
     
 }
 
+export async function getCategoties() {
+    try {
+        const response = await api.get('/categories');
+        return response.data;
+    } catch (error) {
+        console.error('Htto erro in get Categories: ', error)
+    }
+}
+
+
+
 export async function createCategory(category){
     const authStore = useAuthStore();
     const token = authStore.token;

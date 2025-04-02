@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { createCategory } from "@/services/HttpService";
+import { createCategory, getCategoties } from "@/services/HttpService";
 
 
 export const useCreateCategories = defineStore('categories', () => {
@@ -35,3 +35,19 @@ export const useCreateCategories = defineStore('categories', () => {
         createCategorieForm
     }
 })
+//função implementada para guardar os dados nas stores
+export const useGetCategories = defineStore('getCategories', () =>{
+    const categories = ref([]);
+    const categoriesById = ref([]);
+
+    async function getCategoriesStore() {
+        try {
+            const data = await getCategoties();
+            categories.value = data;
+            categoriesById.value = categories.value.filter(category => category.user_id === 7);
+        } catch (error) {
+            console.error('Error ao consumir a função GET: ' + error);
+        }
+    }
+    return { categories, categoriesById , getCategoriesStore};
+}); 

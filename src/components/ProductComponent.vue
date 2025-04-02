@@ -15,11 +15,10 @@ defineProps({
         type: [Number, String],
         required: true
     },
-    description: {
-        type: String,
-        required: true,
-        default: null,
-    }
+    // description: {
+    //     type: [String, null],
+    //     default: null,
+    // }
 });
 
 </script>
@@ -30,6 +29,6 @@ defineProps({
         <img class="rounded-xl" :src="imageUrl" :alt="name">
         <h5 class="mb-2 font-sans text-2xl !font-bold text-black">{{ name }}</h5>
         <h3 class="mb-2 text-xl !font-semibold  text-black py-2">$ {{ price }}</h3>
-        <p class="mb-3 font-normal text-black text-justify">{{ description }}</p>
+        <!-- <p class="mb-3 font-normal text-black text-justify">{{ description }}</p> -->
     </div>
 </template>
