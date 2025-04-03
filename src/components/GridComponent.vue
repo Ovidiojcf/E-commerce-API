@@ -34,7 +34,7 @@
                 track your health, and stay safe. watchOS 11 brings you more intelligence,
                 customization options, and connectivity. With Fall Detection and enhanced 
                 workout metrics, Apple Watch SE is packed with possibilities at your fingertips.</p>
-                <button class="w-fit text-black !font-bold px-7.5 py-2.5 border-4 border-black rounded-xl hover:bg-blue-900 text-black">Shop Now</button>
+                <button class="w-fit text-black !font-bold px-7.5 py-2.5 border-4 border-black rounded-xl hover:bg-blue-900">Shop Now</button>
             </div>
         </div>
     </section>

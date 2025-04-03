@@ -1,7 +1,11 @@
 <script setup>
-import { Login } from '@/services/HttpService';
+import { Login, Register } from '@/services/HttpService';
+import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const auth = useAuthStore();
+const router = useRouter();
 // Estado para controlar qual formulário mostrar
 const isLoginForm = ref(true);
 
@@ -19,20 +23,42 @@ function toggleForm() {
   name.value = '';
 }
 
-async function handleSubmit() {
-  if (isLoginForm.value) {
-    // Lógica de login
-    const result = await Login({ email: email.value, password: password.value });
-    if (result.status === 200) {
-      return 1;
+async function enviar() {
+  try {
+    if (isLoginForm.value) {
+      // Lógica de login (já implementada)
+      const result = await Login({ email: email.value, password: password.value });
+      
+      if (result.status === 200) {
+        router.push('/home');
+        alert('Login sucesso');
+        auth.saveUser(result.data);
+      } else {
+        alert('Login falhou');
+      }
     } else {
-      alert('Login falhou');
+      // Lógica de registro
+      const result = await Register({ 
+        name: name.value,
+        email: email.value, 
+        password: password.value 
+      });
+      
+      if (result.status === 201 || result.status === 200) {
+        alert('Registro realizado com sucesso!');
+        //Fazer login automaticamente após o registro
+        const loginResult = await Login({ email: email.value, password: password.value });
+        if (loginResult.status === 200) {
+          router.push('/home');
+          auth.saveUser(loginResult.data);
+        }
+      } else {
+        alert('Falha no registro: ' + (result.data?.message || 'Erro desconhecido'));
+      }
     }
-  } else {
-    // Lógica de cadastro (você precisará implementar o serviço de cadastro)
-    alert(`Cadastro: Nome: ${name.value}, Email: ${email.value}, Senha: ${password.value}`);
-    // Após cadastro bem-sucedido, você pode voltar para o formulário de login
-    // isLoginForm.value = true;
+  } catch (error) {
+    console.error('Erro:', error);
+    alert('Ocorreu um erro: ' + (error.message || 'Erro desconhecido'));
   }
 }
 </script>
@@ -60,7 +86,7 @@ async function handleSubmit() {
         </h2>
       </div>
       <div class="mt-10 w-auto">
-        <form class="space-y-6" @submit.prevent="handleSubmit">
+        <form class="space-y-6" @submit.prevent="enviar">
           <!-- Campo Nome (apenas para cadastro) -->
           <div v-if="!isLoginForm">
             <label for="name" class="block text-sm/6 font-medium text-gray-900">Full name</label>

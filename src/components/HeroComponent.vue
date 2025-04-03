@@ -4,7 +4,7 @@
             <h3 class="text-3xl !font-semibold text-white">Pro.Beyond.</h3>
             <h1 class="text-9xl text-white tracking-tight">IPhone 14 <strong class="text-violet-800">Pro</strong></h1>
             <p class="text-2xl text-white py-2">Created to change everything for the better. For everyone</p>
-            <button class="w-fit text-white px-7.5 py-2.5 border-4 border-black rounded-xl hover:bg-violet-800 text-black">Shop Now</button>
+            <button class="w-fit text-white px-7.5 py-2.5 border-4 border-black rounded-xl hover:bg-violet-800">Shop Now</button>
         </div>
         <div>
             <img src="@/assets/iphoneImage.svg" alt="">
