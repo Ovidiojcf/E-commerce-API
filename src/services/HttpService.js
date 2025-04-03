@@ -96,3 +96,11 @@ export async function editCategory(categoryId, categoryData){
         throw error
     }
 }
+
+export async function createAddress(address) {
+    try {
+        
+    } catch (error) {
+        
+    }
+}

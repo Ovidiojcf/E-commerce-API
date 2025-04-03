@@ -89,7 +89,7 @@ onUnmounted(() => {
                             class="absolute right-0 top-12 bg-white shadow-lg rounded-md w-48">
                             <ul class="py-2 text-gray-800">
                                 <li>
-                                    <a href="/" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+                                    <a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                                 </li>
                                 <li>
                                     <a v-if="auth.user?.role == 'ADMIN'" href="/moderator"
