@@ -98,9 +98,34 @@ export async function editCategory(categoryId, categoryData){
 }
 
 export async function createAddress(address) {
+    const authStore = useAuthStore();
+    const token = authStore.token;
     try {
-        
+        const response = await api.post('addresses', address, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
     } catch (error) {
-        
+        console.error('Http error in create Address: ',error);
+        throw error
+    }
+}
+
+export async function getAddress() {
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    try {
+        const response = await api.get('/addresses', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar os endereços');
     }
 }
