@@ -11,7 +11,6 @@ export const useCreateAddress = defineStore('address', () => {
     const state = ref('');
     const country = ref('');
 
-    // Novo: cria objeto JSON em vez de FormData
     function getAddressPayload() {
         return {
             street: street.value,

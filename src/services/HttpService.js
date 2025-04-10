@@ -129,3 +129,49 @@ export async function getAddress() {
         console.error('Erro ao buscar os endereços');
     }
 }
+
+
+export async function createCart(userId, token) {
+    try {
+        const response = await api.post('/cart', {user_id: userId}, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar carrinho:', error);
+        throw error
+    }
+}
+
+export async function getCart(token) {
+    try {
+        const response = await api.get(`/cart/items`, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log('Dados Cart');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar o carrinho existente');
+    }
+}
+
+export async function addItemCart(item, token ) {
+    try {
+        const response = await api.post(`/cart/items`,item,  {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao adicionar produto no carrinho existente');
+    }
+}

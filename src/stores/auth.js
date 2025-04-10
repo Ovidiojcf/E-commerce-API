@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia';
 import { ref } from 'vue';
-
+import { useCreateCart } from './cart';
 export const useAuthStore = defineStore('auth', () => {
     const token = ref(null);
     const user = ref({}) //para receber o objeto usuário
@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth', () => {
         token.value = result.token;
         isAuthenticated.value = true;
 
+        //Chamada para inicializar o carrinho automaticamente após login
+        const cartStore = useCreateCart();
+        cartStore.initCart();
     }
 
     return { token, user, isAuthenticated, logout, saveUser }
