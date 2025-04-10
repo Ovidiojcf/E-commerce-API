@@ -20,7 +20,7 @@ const totalPrice = computed(() => {
 <template>
     <div class="grid grid-cols-3 justify-items-stretch">
         <div class="w-3xs p-4 ">
-            <img class="rounded-xl" :src="item.image_path" :alt="item.name">
+            <img class="rounded-xl" :src="item.image" :alt="item.name">
         </div>
         <div class="flex items-center p-4">
             <h3 class="!font-bold text-black text-start">{{ item.name }}</h3>

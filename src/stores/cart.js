@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { addItemCart, getCart } from "@/services/HttpService";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
+import { getImg } from '@/utils/image';
 
 export const useCreateCart = defineStore('cart', () => {
   const cartId = ref(null);
@@ -11,7 +12,12 @@ export const useCreateCart = defineStore('cart', () => {
   function updateCartState(response) {
     if (response && response.cart_id) {
       cartId.value = response.cart_id;
-      cartItems.value = response.items || [];
+
+      cartItems.value = (response.items || []).map(item => ({
+        ...item,
+        image: getImg(item.image_path),
+      }));
+
       localStorage.setItem("cartId", response.cart_id);
     }
   }

@@ -43,7 +43,11 @@ function decrementItem(item) {
             <div class="mb-4 pb-4 border-b">
                 <h2 class="text-lg font-semibold">Itens do Carrinho ({{ cartItems.length }})</h2>
             </div>
-            <CartItemComponent v-for="item in groupedItems" :key="item.id" :item="item" @increment="incrementItem"
+            <CartItemComponent 
+                v-for="item in groupedItems" 
+                :key="item.id" 
+                :item="item" 
+                @increment="incrementItem"
                 @decrement="decrementItem" />
 
 
