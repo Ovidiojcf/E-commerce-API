@@ -98,9 +98,80 @@ export async function editCategory(categoryId, categoryData){
 }
 
 export async function createAddress(address) {
+    const authStore = useAuthStore();
+    const token = authStore.token;
     try {
-        
+        const response = await api.post('addresses', address, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
     } catch (error) {
-        
+        console.error('Http error in create Address: ',error);
+        throw error
+    }
+}
+
+export async function getAddress() {
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    try {
+        const response = await api.get('/addresses', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar os endereços');
+    }
+}
+
+
+export async function createCart(userId, token) {
+    try {
+        const response = await api.post('/cart', {user_id: userId}, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar carrinho:', error);
+        throw error
+    }
+}
+
+export async function getCart(token) {
+    try {
+        const response = await api.get(`/cart/items`, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log('Dados Cart');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar o carrinho existente');
+    }
+}
+
+export async function addItemCart(item, token ) {
+    try {
+        const response = await api.post(`/cart/items`,item,  {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao adicionar produto no carrinho existente');
     }
 }

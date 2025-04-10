@@ -36,9 +36,13 @@ onMounted(async () => {
         <div class="">
             <!-- Products grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 content-center gap-6 ">
-                <ProductComponent v-for="product in allProducts" :key="product.id"
+                <ProductComponent 
+                    v-for="product in allProducts" 
+                    :key="product.id"
+                    :id="product.id"
                     :imageUrl="getImg(product.image_path)"
-                    :name="product.name" :price="product.price"
+                    :name="product.name" 
+                    :price="product.price"
                      />
                      <!--:description="product.description" devolver para o componente quando necessário-->
             </div>

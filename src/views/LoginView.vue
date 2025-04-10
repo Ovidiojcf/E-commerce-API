@@ -3,9 +3,11 @@ import { Login, Register } from '@/services/HttpService';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useCreateCart } from '@/stores/cart';
 
 const auth = useAuthStore();
 const router = useRouter();
+const cartStore = useCreateCart(); // para criar o carrinho apos o login
 // Estado para controlar qual formulário mostrar
 const isLoginForm = ref(true);
 
@@ -28,22 +30,22 @@ async function enviar() {
     if (isLoginForm.value) {
       // Lógica de login (já implementada)
       const result = await Login({ email: email.value, password: password.value });
-      
+
       if (result.status === 200) {
-        router.push('/home');
         alert('Login sucesso');
         auth.saveUser(result.data);
+        router.push('/home');
       } else {
         alert('Login falhou');
       }
     } else {
       // Lógica de registro
-      const result = await Register({ 
+      const result = await Register({
         name: name.value,
-        email: email.value, 
-        password: password.value 
+        email: email.value,
+        password: password.value
       });
-      
+
       if (result.status === 201 || result.status === 200) {
         alert('Registro realizado com sucesso!');
         //Fazer login automaticamente após o registro
