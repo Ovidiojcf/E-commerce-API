@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { addItemCart, getCart } from "@/services/HttpService";
+import { addItemCart, getCart, removeItemCart  } from "@/services/HttpService";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { getImg } from '@/utils/image';
@@ -71,6 +71,21 @@ export const useCreateCart = defineStore('cart', () => {
     }
   }
 
+  async function removeFromCart(item) {
+    try {
+      const token = useAuthStore().token;
+
+      console.log('Removendo item do carrinho com ID:', item.id);
+
+      await removeItemCart(item, token);
+
+      const response = await getCart(token);
+      updateCartState(response);
+    } catch (error) {
+      console.error("Erro ao remover item do carrinho:", error);
+    }
+  }
+
   function incrementItemQuantity(productId){
     const item = cartItems.value.find( i => i.id === productId);
     if(item){
@@ -90,6 +105,7 @@ export const useCreateCart = defineStore('cart', () => {
     initCart,
     setCartItems,
     addToCart,
+    removeFromCart,
     incrementItemQuantity,
     decrementItemQuantity
   };
