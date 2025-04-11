@@ -176,6 +176,21 @@ export async function addItemCart(item, token ) {
     }
 }
 
+export async function updateItemCart(item, token) {
+    try {
+        const response = await api.put('/cart/items', item, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+      
+          return response.data;
+    } catch (error) {
+        console.error('Erro ao atualizar o produto no carrinho existente');
+    }
+}
+
 export async function removeItemCart(Product, token) {
     try {
         const response = await api.delete(`/cart/items`,  {
@@ -190,3 +205,4 @@ export async function removeItemCart(Product, token) {
         console.error('Erro ao deletar produto no carrinho existente');
     }
 }
+
