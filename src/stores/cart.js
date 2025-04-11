@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { addItemCart, getCart, removeItemCart  } from "@/services/HttpService";
+import { addItemCart, getCart, removeItemCart, updateItemCart  } from "@/services/HttpService";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { getImg } from '@/utils/image';
@@ -7,7 +7,7 @@ import { getImg } from '@/utils/image';
 export const useCreateCart = defineStore('cart', () => {
   const cartId = ref(null);
   const cartItems = ref([]);
-
+  
   // Atualiza o estado da store do carrinho com os dados recebidos
   function updateCartState(response) {
     if (response && response.cart_id) {
@@ -86,16 +86,26 @@ export const useCreateCart = defineStore('cart', () => {
     }
   }
 
-  function incrementItemQuantity(productId){
+  async function incrementItemQuantity(productId){
+    const token = useAuthStore().token;
     const item = cartItems.value.find( i => i.id === productId);
     if(item){
         item.quantity += 1;
+        const data = { product_id: item.product_id, quantity: item.quantity };
+        await updateItemCart(data, token);
+        const response = await getCart(token);
+        updateCartState(response);
     }
   }
-  function decrementItemQuantity(productId){
+  async function decrementItemQuantity(productId){
+    const token = useAuthStore().token;
     const item = cartItems.value.find( i => i.id === productId);
     if(item && item.quantity > 1){
         item.quantity -= 1;
+        const data = { product_id: item.product_id, quantity: item.quantity };
+        await updateItemCart(data,token);
+        const response = await getCart(token);
+        updateCartState(response);
     }
   }
 
