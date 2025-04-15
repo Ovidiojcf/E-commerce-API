@@ -148,7 +148,7 @@ export async function createCart(userId, token) {
 
 export async function getCart(token) {
     try {
-        const response = await api.get(`/cart/items`, {
+        const response = await api.get('/cart/items', {
             headers:{
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -206,3 +206,31 @@ export async function removeItemCart(Product, token) {
     }
 }
 
+export async function createOrder(Order,token) {
+    try {
+        const response = await api.post('/orders', Order, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar pedido:', error);
+        throw error
+    }
+}
+
+export async function getOrders(token) {
+    try {
+        const response = await api.get('/orders', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar os pedidos existentes');
+    }
+}
