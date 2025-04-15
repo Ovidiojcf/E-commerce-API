@@ -30,48 +30,48 @@ onMounted(async () => {
     <section class="flex flex-row p-20 gap-10">
         <div class="w-full">
             <h2 class="text-lg font-bold mb-4">Added Addresses</h2>
-
-            <div v-for="(addresses, index) in allAddress" :key="index" class="bg-gray-100 p-4 mb-2 rounded-sm">
-                <div class="flex justify-between items-start">
-
-                    <!-- Coluna da Esquerda: Nome + Endereço -->
-                    <div>
-                        <!-- Nome -->
-                        <div class="flex items-center mb-1">
-                            <span class="!font-semibold text-lg">{{ auth.user.name }}</span>
-                        </div>
-
-                        <!-- Address details -->
+            <div class="flex flex-col gap-4">
+                <div v-for="(addresses, index) in allAddress" :key="index" class="bg-gray-100 p-4 rounded-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <!-- Coluna da Esquerda: Nome + Endereço -->
                         <div>
-                            <p class="text-gray-800">
-                                {{ addresses.street }} {{ addresses.number }}, {{ addresses.zip }}
-                            </p>
-                            <p class="text-gray-800">
-                                {{ addresses.city }} - {{ addresses.state }}
-                            </p>
-                            <p class="text-gray-800">
-                                {{ addresses.country }}
-                            </p>
-                        </div>
-                    </div>
+                            <!-- Nome -->
+                            <div class="flex items-center mb-1">
+                                <span class="!font-semibold text-lg">{{ auth.user.name }}</span>
+                            </div>
 
-                    <!-- Coluna da Direita: Botões -->
-                    <div class="flex space-x-2">
-                        <button class="p-2" @click="editAddress(index)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-pen">
-                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                            </svg>
-                        </button>
-                        <button class="p-2" @click="removeAddress(index)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-x">
-                                <path d="M18 6 6 18" />
-                                <path d="m6 6 12 12" />
-                            </svg>
-                        </button>
+                            <!-- Address details -->
+                            <div>
+                                <p class="text-gray-800">
+                                    {{ addresses.street }} {{ addresses.number }}, {{ addresses.zip }}
+                                </p>
+                                <p class="text-gray-800">
+                                    {{ addresses.city }} - {{ addresses.state }}
+                                </p>
+                                <p class="text-gray-800">
+                                    {{ addresses.country }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Coluna da Direita: Botões -->
+                        <div class="flex space-x-2">
+                            <button class="p-2" @click="editAddress(index)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-pen">
+                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                </svg>
+                            </button>
+                            <button class="p-2" @click="removeAddress(index)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-x">
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
