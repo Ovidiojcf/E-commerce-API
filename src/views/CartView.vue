@@ -1,13 +1,14 @@
 <script setup>
 import CartItemComponent from '@/components/CartItemComponent.vue';
+import AddressSelector from '@/components/AddressSelector.vue';
 import { useCreateCart } from '@/stores/cart';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Header from '@/components/HeaderComponent.vue';
 const cartStore = useCreateCart();
 const cartItems = computed(() => cartStore.cartItems || []);
 const cartHasItems = computed(() => cartItems.value.length > 0) // resultado para utilizar no v-if
 const groupedItems = computed(() => groupCartItems(cartItems.value));
-
+const selectedAddressId = ref(null); //para escolher o endereço final
 function groupCartItems(items) {
     const grouped = {};
 
@@ -38,6 +39,10 @@ function decrementItem(item) {
 function removeItem(item) {
     cartStore.removeFromCart(item);
 }
+function handleAddressSelected(addressId) {
+  selectedAddressId.value = addressId;
+  console.log('Endereço selecionado:', addressId);
+}
 </script>
 <template>
     <Header />
@@ -48,8 +53,13 @@ function removeItem(item) {
             <div class="mb-4 pb-4 border-b">
                 <h2 class="text-lg font-semibold">Itens do Carrinho ({{ cartItems.length }})</h2>
             </div>
+            <!-- Listagem de Itens do Carrinho -->
             <CartItemComponent v-for="item in groupedItems" :key="item.product_id" :item="item"
                 @increment="incrementItem" @decrement="decrementItem" @remove="removeItem" />
+             <!-- Seletor de Endereço -->
+            <div class="mt-10">
+                <AddressSelector @addressSelected="handleAddressSelected" />
+            </div>
         </div>
 
         <div v-else class="flex flex-col justify-content items-center text-center gap-4 py-12">
