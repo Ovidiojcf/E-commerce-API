@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { createCoupon } from "@/services/HttpService";
+import { createCoupon, getCoupons, editCoupom } from "@/services/HttpService";
 import { useAuthStore } from "@/stores/auth";
 
 export const useCreateCoupom = defineStore('coupom', () => {
-    const coupomCode = ref(null);
+    const id = ref(null); // api retorna ele 
+    const coupomCode = ref(null);   
     const coupomDiscount = ref(null);
     const coupomStartDate = ref(null);
     const coupomEndDate = ref(null);
@@ -28,7 +29,22 @@ export const useCreateCoupom = defineStore('coupom', () => {
         }
     }
 
-    async function getCoupons() {
+    async function editCouponForm() {
+        try {
+          const couponData = {
+            code: coupomCode.value,
+            discount: coupomDiscount.value,
+            start_date: coupomStartDate.value,
+            end_date: coupomEndDate.value,
+          };
+          const result = await editCoupom(id.value, couponData, token);
+          return result;
+        } catch (error) {
+          console.error("Erro ao editar cupom:", error);
+        }
+    }
+
+    async function getCouponsList() {
         try {
             const response = await getCoupons(token);
             coupomList.value = response;
@@ -36,6 +52,21 @@ export const useCreateCoupom = defineStore('coupom', () => {
             console.error('Erro ao buscar cupons existentes:', error);
         }
     }
+    function setEditCoupon(coupon) {
+        id.value = coupon.id;
+        coupomCode.value = coupon.code;
+        coupomDiscount.value = coupon.discount;
+        coupomStartDate.value = coupon.start_date;
+        coupomEndDate.value = coupon.end_date;
+      }
+    
+      function clearForm() {
+        id.value = null;
+        coupomCode.value = '';
+        coupomDiscount.value = '';
+        coupomStartDate.value = '';
+        coupomEndDate.value = '';
+      }
 
     return {
         coupomCode,
@@ -43,7 +74,11 @@ export const useCreateCoupom = defineStore('coupom', () => {
         coupomStartDate,
         coupomEndDate,
         createNewCoupon,
-        getCoupons,
+        getCouponsList,
+        editCouponForm,
+        setEditCoupon,
+        clearForm,
+        id,
         coupomList
     };
 });
