@@ -18,7 +18,7 @@ export const useCreateCoupom = defineStore('coupom', () => {
         try {
             const newCoupon = {
                 code: coupomCode.value,
-                discount: coupomDiscount.value,
+                discount_percentage: coupomDiscount.value,
                 start_date: coupomStartDate.value,
                 end_date: coupomEndDate.value
             };
@@ -33,7 +33,7 @@ export const useCreateCoupom = defineStore('coupom', () => {
         try {
           const couponData = {
             code: coupomCode.value,
-            discount: coupomDiscount.value,
+            discount_percentage: coupomDiscount.value,
             start_date: coupomStartDate.value,
             end_date: coupomEndDate.value,
           };
@@ -48,6 +48,7 @@ export const useCreateCoupom = defineStore('coupom', () => {
         try {
             const response = await getCoupons(token);
             coupomList.value = response;
+            return coupomList.value;
         } catch (error) {
             console.error('Erro ao buscar cupons existentes:', error);
         }
