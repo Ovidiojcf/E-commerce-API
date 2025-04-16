@@ -262,3 +262,31 @@ export async function getCoupons(token) {
         console.error('Erro ao buscar os cupons existentes');
     }
 }
+
+export async function editCoupom(coupomId, coupomData, token) {
+    try {
+        const response = await api.put(`coupons/${coupomId}`, coupomData, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in Edit Coupom:', error);
+    }
+}
+
+export async function deleteCoupom(coupomId, token) {
+    try {
+        const response = await api.delete(`coupons/${coupomId}`,{
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in Delete Coupom:', error);
+    }
+}
