@@ -245,7 +245,7 @@ export async function createCoupon(Coupon, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao criar cupom:', error);
+        console.error('http error to create coupom:',error);
     }
 }
 
