@@ -217,7 +217,6 @@ export async function createOrder(Order,token) {
         return response.data;
     } catch (error) {
         console.error('Erro ao criar pedido:', error);
-        throw error
     }
 }
 
@@ -232,5 +231,34 @@ export async function getOrders(token) {
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar os pedidos existentes');
+    }
+}
+
+
+export async function createCoupon(Coupon, token) {
+    try {
+        const response = await api.post('/coupons', Coupon, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao criar cupom:', error);
+    }
+}
+
+export async function getCoupons(token) {
+    try {
+        const response = await api.get('/coupons', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar os cupons existentes');
     }
 }
