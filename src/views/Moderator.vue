@@ -2,6 +2,7 @@
 import PostProducts from '@/components/PostProducts.vue';
 import Header from '@/components/HeaderComponent.vue';
 import PostCategories from '@/components/PostCategories.vue';
+import PostCoupom from '@/components/PostCoupom.vue';
 import { ref } from 'vue';
 
 // Estado da aba ativa
@@ -11,7 +12,8 @@ const activeTab = ref(1);
 const tabs = [
     { id: 1, label: "Product" },
     { id: 2, label: "Category" },
-    { id: 3, label: "Discount" }
+    { id: 3, label: "Discount" },
+    { id: 4, label: "Coupons" },
 ];
 </script>
 
@@ -37,6 +39,9 @@ const tabs = [
             </div>
             <div v-if="activeTab === 3">
 
+            </div>
+            <div v-if="activeTab === 4">
+                <PostCoupom />
             </div>
         </div>
     </main>
