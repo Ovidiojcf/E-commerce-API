@@ -103,6 +103,12 @@ async function submitOrder() {
             <div class="mt-10 py-5">
                 <AddressSelector @addressSelected="handleAddressSelected" />
             </div>
+            <div class="mt-10">
+                <h1 class="text-xl !font-bold !mb-2">Finalizar Pedido</h1>
+                <button @click="submitOrder" class="bg-indigo-600 text-white px-4 py-2 rounded-md">
+                    Finalizar
+                </button>
+            </div>
         </div>
 
         <div v-else class="flex flex-col justify-content items-center text-center gap-4 py-12">
@@ -112,12 +118,6 @@ async function submitOrder() {
                 class="w-64 bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
                 Continuar Comprando
             </router-link>
-        </div>
-        <div class="mt-10">
-            <h1 class="text-xl font-bold mb-4">Finalizar Pedido</h1>
-            <button @click="submitOrder" class="bg-indigo-600 text-white px-4 py-2 rounded-md">
-                Finalizar
-            </button>
         </div>
     </div>
 </template>

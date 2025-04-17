@@ -23,7 +23,7 @@ function selectAddress(address) {
 
 <template>
   <div>
-    <h2 class="text-lg font-bold mb-4">Selecione um endereço</h2>
+    <h2 class="text-lg !font-bold !mb-4">Selecione um endereço</h2>
     <div v-if="allAddresses.length > 0" class="grid gap-4">
       <div
         v-for="address in allAddresses"
