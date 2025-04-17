@@ -99,7 +99,7 @@ async function submitOrder() {
         const orderData = {
             address_id: selectedAddressId.value,
             items: items,
-            coupom: selectedCouponId.value, // opcional
+            coupon_id: selectedCouponId.value, // opcional
         };
 
         const response = await orderStore.createOrderSubmit(orderData);
