@@ -66,10 +66,12 @@ onUnmounted(() => {
 
                 <div class="flex items-center gap-5 mt-4 md:mt-0">
                     <button aria-label="Favorites" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                        <img src="@/components/icons/actions/Favorites.svg" alt="Favorites" class="w-6 h-6">
+                        <router-link to="/favorites">
+                            <img src="@/components/icons/actions/Favorites.svg" alt="Favorites" class="w-6 h-6">
+                        </router-link>
                     </button>
                     <button aria-label="Cart" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                        <router-link to="/cart" class="hover:text-indigo-600 transition-colors">
+                        <router-link to="/cart">
                             <img src="@/components/icons/actions/Cart.svg" alt="Cart" class="w-6 h-6">
                         </router-link>
                     </button>
@@ -85,8 +87,7 @@ onUnmounted(() => {
                         </span>
 
                         <!-- Dropdown -->
-                        <div v-show="showDropdown"
-                            class="absolute right-0 top-12 bg-white shadow-lg rounded-md w-48">
+                        <div v-show="showDropdown" class="absolute right-0 top-12 bg-white shadow-lg rounded-md w-48">
                             <ul class="py-2 text-gray-800">
                                 <li>
                                     <a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
@@ -96,6 +97,9 @@ onUnmounted(() => {
                                         class="block px-4 py-2 hover:bg-gray-100">Moderator</a>
                                 </li>
                                 <li>
+                                    <router-link to="/login"><a class="block px-4 py-2 hover:bg-gray-100">Login</a></router-link>
+                                </li>
+                                <li v-if="auth.user && Object.keys(auth.user).length">
                                     <button @click="auth.logout"
                                         class="block px-4 py-2 hover:bg-red-100 text-red-600">Logout</button>
                                 </li>
@@ -108,4 +112,3 @@ onUnmounted(() => {
         </div>
     </header>
 </template>
-
