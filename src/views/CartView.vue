@@ -7,6 +7,7 @@ import { computed, ref } from 'vue';
 import Header from '@/components/HeaderComponent.vue';
 const cartStore = useCreateCart();
 const cartItems = computed(() => cartStore.cartItems || []);
+const totalAmount = computed(() => cartStore.totalAmount || 0);
 const cartHasItems = computed(() => cartItems.value.length > 0) // resultado para utilizar no v-if
 const groupedItems = computed(() => groupCartItems(cartItems.value));
 const selectedAddressId = ref(null); //para escolher o endereço final
@@ -78,7 +79,7 @@ async function submitOrder() {
         console.log('Pedido criado:', response);
 
         // limpa o carrinho
-        //cartStore.clearCart();
+        cartStore.clearCart();
         // redireciona para uma tela de sucesso ou pedidos
         // router.push('/pedidos'); // se estiver usando Vue Router
     } catch (error) {
@@ -94,11 +95,15 @@ async function submitOrder() {
 
         <div v-if="cartHasItems">
             <div class="mb-4 pb-4 border-b">
-                <h2 class="text-lg font-semibold">Itens do Carrinho ({{ cartItems.length }})</h2>
+                <h2 class="text-lg !font-semibold">Itens do Carrinho ({{ cartItems.length }})</h2>
             </div>
             <!-- Listagem de Itens do Carrinho -->
             <CartItemComponent v-for="item in groupedItems" :key="item.product_id" :item="item"
                 @increment="incrementItem" @decrement="decrementItem" @remove="removeItem" />
+            <!-- Total do Carrinho-->
+            <div class="mb-4 pb-4 border-b">
+                <h2 class="text-lg !font-semibold">Total: R$ {{ totalAmount.toFixed(2) }}</h2>
+            </div>
             <!-- Seletor de Endereço -->
             <div class="mt-10 py-5">
                 <AddressSelector @addressSelected="handleAddressSelected" />

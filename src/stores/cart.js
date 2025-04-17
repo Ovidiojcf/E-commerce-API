@@ -7,6 +7,7 @@ import { getImg } from '@/utils/image';
 export const useCreateCart = defineStore('cart', () => {
   const cartId = ref(null);
   const cartItems = ref([]);
+  const totalAmount = ref(0);
   
   // Atualiza o estado da store do carrinho com os dados recebidos
   function updateCartState(response) {
@@ -17,7 +18,7 @@ export const useCreateCart = defineStore('cart', () => {
         ...item,
         image: getImg(item.image_path),
       }));
-
+      totalAmount.value = response.total_amount || 0;
       localStorage.setItem("cartId", response.cart_id);
     }
   }
@@ -112,6 +113,7 @@ export const useCreateCart = defineStore('cart', () => {
   return {
     cartId,
     cartItems,
+    totalAmount,
     initCart,
     setCartItems,
     addToCart,
