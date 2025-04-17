@@ -32,6 +32,14 @@ async function editCoupon(coupon) {
     await coupons.getCouponsList();
 }
 
+function DateFormat(date) {
+    if (!date) return '';
+    const data = new Date(date);
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Janeiro é 0!
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
 onMounted(async () => {
     await coupons.getCouponsList();
 });
@@ -39,7 +47,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <section class="flex flex-col p-20 gap-5">
+    <section class="flex flex-col p-10 gap-5">
         <h2 class="text-lg font-bold text-black">{{ coupons.id ? 'Edit Coupon' : 'Create Coupon' }}</h2>
 
         <div class="flex flex-col gap-4 w-full max-w-md">
@@ -62,18 +70,19 @@ onMounted(async () => {
         </div>
     </section>
 
-    <section class="flex flex-col p-20 gap-5">
+    <section class="flex flex-col p-10 gap-5">
         <h2 class="font-bold text-black text-lg">Existing Coupons</h2>
         <div v-for="coupon in couponsList" :key="coupon.id"
             class="flex justify-between items-center border p-3 rounded shadow-sm">
             <div>
                 <h3 class="font-bold text-black text-sm">Code: <span class="font-semibold text-gray-800">{{ coupon.code
-                        }}</span></h3>
+                }}</span></h3>
                 <h3 class="font-bold text-black text-sm">Discount: <span class="font-semibold text-gray-800">{{
                     coupon.discount }}%</span></h3>
-                <h3 class="font-bold text-black text-sm">Start: <span class="text-gray-700">{{ coupon.start_date
-                        }}</span></h3>
-                <h3 class="font-bold text-black text-sm">End: <span class="text-gray-700">{{ coupon.end_date }}</span>
+                <h3 class="font-bold text-black text-sm">Start: <span class="text-gray-700">{{
+                    DateFormat(coupon.start_date) }}</span></h3>
+                <h3 class="font-bold text-black text-sm">End: <span class="text-gray-700">{{
+                    DateFormat(coupon.end_date) }}</span>
                 </h3>
             </div>
             <button @click="editCoupon(coupon)" class="text-blue-500 hover:text-blue-700">✏️ Edit</button>
