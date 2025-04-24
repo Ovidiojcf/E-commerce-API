@@ -27,7 +27,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <section class="flex flex-row p-20 gap-10">
+    <section class="container mx-auto py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div class="w-full">
             <h2 class="text-lg font-bold mb-4">Added Addresses</h2>
             <div class="flex flex-col gap-4">
