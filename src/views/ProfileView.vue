@@ -8,11 +8,13 @@ const auth = useAuthStore();
 </script>
 <template>
     <Header />
-    <UserProfileCard 
-    :name="auth.user?.name"
-    :email="auth.user?.email"
-    :avatarUrl="auth.user?.image_path"
-    />
-    <Address />
-    <h2>{{ auth.user?.image_path }}</h2>
+    <div class="container mx-auto px-10 py-10 space-y-10">
+        <!-- Perfil User-->
+        <section class="flex justify-start">
+            <UserProfileCard :name="auth.user?.name" :email="auth.user?.email" :avatarUrl="auth.user?.image_path" />
+        </section>
+    </div>
+    <section class="container mx-auto px-10 py-10 space-y-10">
+        <Address />
+    </section>
 </template>
