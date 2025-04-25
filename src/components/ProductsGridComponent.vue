@@ -32,7 +32,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <section class="bg-white p-10">
+    <section class="bg-white p-6">
         <div class="">
             <!-- Products grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 content-center gap-6 ">
