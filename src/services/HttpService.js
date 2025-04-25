@@ -290,3 +290,59 @@ export async function deleteCoupom(coupomId, token) {
         console.error('Http error in Delete Coupom:', error);
     }
 }
+
+export async function createDiscount(discount, token) {
+    try {
+        const response = await api.post('/discounts', discount, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP error while creating discount:', error);
+    }
+}
+
+export async function getDiscounts(token) {
+    try {
+        const response = await api.get('/discounts', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP error while fetching discounts:', error);
+    }
+}
+
+export async function editDiscount(discountId, discountData, token) {
+    try {
+        const response = await api.put(`/discounts/${discountId}`, discountData, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP error while editing discount:', error);
+    }
+}
+
+export async function deleteDiscount(discountId, token) {
+    try {
+        const response = await api.delete(`/discounts/${discountId}`, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('HTTP error while deleting discount:', error);
+    }
+}
