@@ -97,6 +97,21 @@ export async function editCategory(categoryId, categoryData){
     }
 }
 
+export async function deleteCategory(categoryId, token) {
+    try {
+        const response = await api.delete(`categories/${categoryId}`,{
+            headers:{
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in delete Category: ',error);
+        throw error
+    }
+}
+
+
 export async function createAddress(address) {
     const authStore = useAuthStore();
     const token = authStore.token;
@@ -130,6 +145,34 @@ export async function getAddress() {
     }
 }
 
+export async function editAddress(addressId, addressData, token) {
+    try {
+        const response = await api.put(`addresses/${addressId}`, addressData, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;  
+    } catch (error) {
+        console.error('Http error in edit Address: ',error);
+        throw error
+    }
+}
+
+export async function deleteAddress(addressId){
+    try {
+        const response = await api.delete(`addresses/${addressId}`, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        })
+    } catch (error) {
+        console.error('Http error in delete Address: ',error);
+        throw error
+    }
+}
 
 export async function createCart(userId, token) {
     try {
