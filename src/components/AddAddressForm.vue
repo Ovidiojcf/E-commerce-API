@@ -6,13 +6,20 @@ const emit = defineEmits(['close', 'refresh']);
 const address = useCreateAddress();
 
 const handleSubmit = async () => {
-  const result = await address.createAddressForm();
-  if (result) {
-    alert('Endereço cadastrado com sucesso!');
-    emit('refresh'); // Atualiza a lista no pai
-    emit('close');   // Fecha o formulário
+  let result;
+  
+  if (address.id) {
+    result = await address.editAddressForm(); // se tiver id -> edita
   } else {
-    alert('Falha ao cadastrar endereço.');
+    result = await address.createAddressForm(); // se não tiver id -> cria
+  }
+
+  if (result) {
+    alert(address.id ? 'Endereço editado com sucesso!' : 'Endereço cadastrado com sucesso!');
+    emit('refresh');
+    emit('close');
+  } else {
+    alert('Falha ao salvar endereço.');
   }
 };
 </script>
