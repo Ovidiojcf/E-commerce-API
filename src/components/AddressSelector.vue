@@ -19,6 +19,7 @@ function selectAddress(address) {
   selected.value = address.id;
   emit('addressSelected', address.id);
 }
+//Template para selecionar o endereço dentro do carrinho de compras
 </script>
 
 <template>
