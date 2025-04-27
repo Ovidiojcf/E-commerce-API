@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useGetAddress } from '@/stores/address';
+import { useGetAddress, useCreateAddress } from '@/stores/address';
 import { useAuthStore } from '@/stores/auth';
 import AddAddressForm from '@/components/AddAddressForm.vue';
 
@@ -8,6 +8,7 @@ import AddAddressForm from '@/components/AddAddressForm.vue';
 const allAddress = ref([]);
 const showForm = ref(false);
 const store = useGetAddress();// para pegar os dados da store
+const addressStore = useCreateAddress();
 const auth = useAuthStore(); // para apresentar o nome do usuário
 
 
@@ -16,15 +17,20 @@ async function loadAddresses() {
   allAddress.value = store.addresses;
 }
 
-async function sendAddress() {
-    const result = await address.createAddressForm();
-    console.log('Resultado do Envio do Endereço: ', result);
-    if (result) {
-        alert('Endereço cadastrado com Sucesso');
-    } else {
-        alert('Endereço não foi cadastrado');
-    }
+function editAddress(addr) {
+  // 1. Preenche a store com os dados recebidos
+  addressStore.id = addr.id;
+  addressStore.street = addr.street;
+  addressStore.number = addr.number;
+  addressStore.zip = addr.zip;
+  addressStore.city = addr.city;
+  addressStore.state = addr.state;
+  addressStore.country = addr.country;
+
+  // 2. Mostra o formulário para edição
+  showForm.value = true;
 }
+
 
 function toggleForm() {
   showForm.value = !showForm.value;
@@ -54,6 +60,7 @@ onMounted(loadAddresses);
           <p>{{ addr.street }} {{ addr.number }}, {{ addr.zip }}</p>
           <p>{{ addr.city }} - {{ addr.state }}</p>
           <p>{{ addr.country }}</p>
+          <button @click="editAddress(addr)" class="btn btn-secondary mt-2">Edit</button>
         </div>
       </div>
   
