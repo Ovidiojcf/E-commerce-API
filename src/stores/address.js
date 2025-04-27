@@ -1,15 +1,18 @@
-import { createAddress, getAddress } from "@/services/HttpService";
+import { createAddress, getAddress, editAddress } from "@/services/HttpService";
+import { useAuthStore } from "@/stores/auth";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 
 export const useCreateAddress = defineStore('address', () => {
+    const id = ref(null);
     const street = ref('');
     const number = ref(0);
     const zip = ref(0);
     const city = ref('');
     const state = ref('');
     const country = ref('');
+    const token = useAuthStore().token;
 
     function getAddressPayload() {
         return {
@@ -33,14 +36,27 @@ export const useCreateAddress = defineStore('address', () => {
         }
     }
 
+    async function editAddressForm() {
+        if (!id.value) return;
+        try {
+            const payload = getAddressPayload();
+            const data = await editAddress(id.value, payload, token);
+            return data;
+        } catch (error) {
+            console.error("Erro ao editar o endereço", JSON.stringify(error.response?.data, null, 2));
+        }
+    }
+
     return{
+        id,
         street,
         number,
         zip,
         city,
         state,
         country,
-        createAddressForm
+        createAddressForm,
+        editAddressForm
     }
 })
 
