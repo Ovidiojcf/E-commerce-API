@@ -35,6 +35,16 @@ export async function getProducts() {
     }
 }
 
+export async function getProductById(productId) {
+    try {
+        const response = await api.get(`/products/${productId}`);  
+        return response.data;
+    } catch (error) {
+        console.error('Http error in get Product by Id: ',error);
+        throw error; 
+    }
+}
+
 export async function createProduct(product) {
     const authStore = useAuthStore();//pegar os dados do moderador
     const token = authStore.token; //pegar o token guardado na auth Store do Usuário
