@@ -2,13 +2,11 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
-import { useGetProducts } from '@/stores/product';
 
 const auth = useAuthStore();
 const showDropdown = ref(false);
 const search = ref("");
 const router = useRouter();
-const productsStore = useGetProducts();
 
 
 const toggleDropDown = () => {
