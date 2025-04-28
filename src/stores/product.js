@@ -65,5 +65,13 @@ export const useGetProducts = defineStore('getProducts', () =>{
             console.error("Error ao consumir a função GET" + error)
         }
     }
-    return {products, getProductsStore};
+
+    function searchProductsByName(query) {
+        if (!query.trim()) return [];
+    
+        return products.value.filter(product =>
+          product.name.toLowerCase().includes(query.trim().toLowerCase())
+        );
+      }
+    return {products, getProductsStore, searchProductsByName};
 });

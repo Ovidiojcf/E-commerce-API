@@ -1,9 +1,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
 const auth = useAuthStore();
 const showDropdown = ref(false);
+const search = ref("");
+const router = useRouter();
+
 
 const toggleDropDown = () => {
     showDropdown.value = !showDropdown.value;
@@ -14,6 +18,14 @@ const closeDropdown = (event) => {
         showDropdown.value = false;
     }
 };
+
+const handleSearch = () => {
+    if (search.value.trim() !== "") {
+        router.push(`/search/${search.value.trim()}`);
+        search.value = "";
+    }
+};
+
 
 // Adiciona e remove o event listener corretamente
 onMounted(() => {
@@ -37,7 +49,7 @@ onUnmounted(() => {
                 <!-- Search Bar -->
                 <div class="w-full md:w-64 lg:w-80 mt-4 md:mt-0">
                     <div class="relative">
-                        <input
+                        <input v-model="search" @keyup.enter="handleSearch"
                             class="w-full bg-gray-100 rounded-lg py-2 px-4 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                             placeholder="Search for a Product" type="text" name="search" aria-label="Search" />
                         <span class="absolute right-3 top-2.5 text-gray-400">
@@ -97,7 +109,8 @@ onUnmounted(() => {
                                         class="block px-4 py-2 hover:bg-gray-100">Moderator</a>
                                 </li>
                                 <li>
-                                    <router-link to="/login"><a class="block px-4 py-2 hover:bg-gray-100">Login</a></router-link>
+                                    <router-link to="/login"><a
+                                            class="block px-4 py-2 hover:bg-gray-100">Login</a></router-link>
                                 </li>
                                 <li v-if="auth.user && Object.keys(auth.user).length">
                                     <button @click="auth.logout"
