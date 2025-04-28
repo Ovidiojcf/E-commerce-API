@@ -66,7 +66,7 @@ async function enviar() {
 </script>
 
 <template>
-  <section class="min-h-screen flex items-center justify-center px-6 py-12 lg:px-8">
+  <section class="min-h-screen flex items-center justify-center  px-6 py-12 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 rounded-lg overflow-hidden shadow-lg w-full max-w-5xl">
       <!-- Lado esquerdo -->
       <div class="bg-gray-400 p-8 flex flex-col items-center justify-center">
@@ -80,10 +80,12 @@ async function enviar() {
       <!-- Lado direito -->
       <div class="p-8 border-t-4 border-gray-400 lg:border-t-0 lg:border-l-4 bg-white flex flex-col justify-center">
         <div class="max-w-md w-full mx-auto">
-          <img class="w-auto h-12 mx-auto lg:mx-0" src="@/assets/cyber-logo-black.svg" alt="Logo">
-          <h2 class="mt-10 text-2xl font-bold tracking-tight text-gray-900 text-center lg:text-left">
-            {{ isLoginForm ? 'Sign in to your account' : 'Create your account' }}
-          </h2>
+          <div class="flex flex-col items-center justify-center">
+            <img class="w-auto h-12 mx-auto lg:mx-0" src="@/assets/cyber-logo-black.svg" alt="Logo">
+            <h2 class="mt-10 text-2xl font-bold tracking-tight text-gray-900 text-center lg:text-left">
+              {{ isLoginForm ? 'Sign in to your account' : 'Create your account' }}
+            </h2>
+          </div>
 
           <!-- Aqui você continua com o seu formulário normalmente -->
           <form class="mt-10 space-y-6" @submit.prevent="enviar">
