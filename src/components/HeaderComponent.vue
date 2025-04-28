@@ -2,11 +2,14 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import { useGetProducts } from '@/stores/product';
 
 const auth = useAuthStore();
 const showDropdown = ref(false);
 const search = ref("");
 const router = useRouter();
+const productsStore = useGetProducts();
+
 
 const toggleDropDown = () => {
     showDropdown.value = !showDropdown.value;
@@ -19,11 +22,12 @@ const closeDropdown = (event) => {
 };
 
 const handleSearch = () => {
-    if (search.value.trim() != "") {
-        router.push(`/product/${search.value.trim()}`);
+    if (search.value.trim() !== "") {
+        router.push(`/search/${search.value.trim()}`);
         search.value = "";
     }
-}
+};
+
 
 // Adiciona e remove o event listener corretamente
 onMounted(() => {
