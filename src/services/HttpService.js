@@ -11,7 +11,7 @@ export async function Login(payload) {
         const response = await api.post('login',payload);
         return response;
     } catch (error) {
-        console.error('Error ao efetuar o login', error);
+        console.error('Http error in Log User', error);
         throw error;
     }
 }
@@ -21,7 +21,52 @@ export async function Register(payload) {
         const response = await api.post('register',payload);
         return response;
     } catch (error) {
-        console.error('Error ao cadastrar o usuário', error);
+        console.error('Http error in Register User', error);
+        throw error;
+    }
+}
+
+export async function getUser(token) {
+    try {
+        const response = await api.get('users/me', {
+            headers: { 
+                "Authorization": `Bearer ${token}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in get user data', error);
+        throw error;
+    }
+}
+
+export async function editUserImage(file, token) {
+    try {
+        const formData = new FormData();
+        formData.append('image', file);
+        const response = await api.put('users/image',formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in edit user image: ',error);
+        throw error;
+    }
+}
+
+export async function editUser(userData, token) {
+    try {
+        const response  = await api.put('users/me', userData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in edit user: ',error);
         throw error;
     }
 }
