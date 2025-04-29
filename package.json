@@ -18,6 +18,7 @@
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "postcss": "^8.5.3",
+    "swiper": "^11.2.6",
     "tailwindcss": "^4.1.4",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"

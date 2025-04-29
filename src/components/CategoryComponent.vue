@@ -1,12 +1,17 @@
 <script setup>
 import { useGetCategories } from '@/stores/category';
 import { onMounted, ref } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+
 
 const allCategories = ref([]);
 const store = useGetCategories();
 
 function getImgCategory(image_path){
-    const baseUrl = 'http://35.196.79.227:8000' //base url da api
+    const baseUrl = 'http://35.196.79.227:8000/' //base url da api
     return `${baseUrl}${image_path}`
     }
 
@@ -19,19 +24,30 @@ onMounted(async () => {
 
 
 <template>
-    <section class="bg-white p-10">
-        <h2>Categorias GET</h2>
-        <div class="grid grid-rows-1">
-            <div
-            class="w-full gap-4 p-5 border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <div v-for="category in allCategories" :key="category.id">
-                    <img class="rounded-xl" :src="getImgCategory(category.image_path)">
-                    <h3 class="mb-2 font-sans text-2xl !font-bold text-black">
-                        {{ category.name }}
-                    </h3>
-                    <p class="mb-3 font-normal text-black text-justify">{{ category.description }}</p>
-                </div>
-            </div>
-        </div>
+    <section class="w-full px-4">
+      <h2 class="text-xl font-bold mb-4">Ofertas por categoria</h2>
+  
+      <Swiper
+        :modules="[Navigation]"
+        :breakpoints="{
+          320: { slidesPerView: 2.5, spaceBetween: 10 },
+          640: { slidesPerView: 3.5, spaceBetween: 15 },
+          1024: { slidesPerView: 5, spaceBetween: 20 }
+        }"
+        navigation
+        class="w-full"
+      >
+        <SwiperSlide
+            v-for="(item, index) in allCategories"
+          :key="index"
+          class="flex flex-col items-center"
+        >
+          <div class="bg-indigo-600 rounded-full p-4 w-24 h-24 flex items-center justify-center">
+            <img :src="getImgCategory(item.image_path)" :alt="item.name" class="w-16 h-16 object-contain" />
+          </div>
+          <p class="mt-2 text-center text-sm font-medium">{{ item.name }}</p>
+        </SwiperSlide>
+      </Swiper>
     </section>
-</template>
+  </template>
+  
