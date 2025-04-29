@@ -152,6 +152,28 @@ export async function editCategory(categoryId, categoryData){
     }
 }
 
+export async function editCategoryImage(categoryId, imageFile) {
+    const authStore = useAuthStore();
+    const token = authStore.token;
+
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+        const response = await api.put(`categories/${categoryId}/image`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in editCategoryImage:', error);
+        throw error;
+    }
+}
+
+
 export async function deleteCategory(categoryId, token) {
     try {
         const response = await api.delete(`categories/${categoryId}`,{
