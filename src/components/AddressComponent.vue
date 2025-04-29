@@ -56,11 +56,10 @@ onMounted(loadAddresses);
       <!-- List Addresses -->
       <div class="grid gap-4" v-else>
         <div v-for="(addr, index) in allAddress" :key="index" class="p-4 bg-gray-200 rounded shadow-sm">
-          <p class="font-semibold">{{ auth.user.name }}</p>
+          <p class="!font-semibold">{{ auth.user.name }}</p>
           <p>{{ addr.street }} {{ addr.number }}, {{ addr.zip }}</p>
-          <p>{{ addr.city }} - {{ addr.state }}</p>
-          <p>{{ addr.country }}</p>
-          <button @click="editAddress(addr)" class="btn btn-secondary mt-2">Edit</button>
+          <p>{{ addr.city }} - {{ addr.state }}, {{ addr.country }}</p>
+          <button @click="editAddress(addr)" class="btn btn-primary" >Edit</button>
         </div>
       </div>
   

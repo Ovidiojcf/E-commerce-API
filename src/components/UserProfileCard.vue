@@ -72,8 +72,8 @@ function cancelEdit() {
 
 <template>
     <div
-        class="flex flex-row w-full max-w-sm bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden gap-6 p-6 text-center">
-        <div class="w-30 h-30">
+        class="flex flex-row w-full max-w-sm bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden gap-6 p-4 text-center">
+        <div class="w-auto h-auto">
             <FileDrop v-if="isEditing" 
                 @upload="onUpload" 
                 @preview="onPreview" 
@@ -81,10 +81,10 @@ function cancelEdit() {
             <img v-else 
                 :src="getImg(avatarUrl)" 
                 alt="Foto do usuário"
-                class="w-full h-full rounded-full object-cover border-2 border-gray-300" />
+                class="w-full h-full rounded-full object-contain" />
         </div>
 
-        <div class="flex flex-col justify-center items-start">
+        <div class="flex flex-col justify-center items-center gap-2">
             <template v-if="isEditing">
                 <input v-model="nameInput" class="mb-2 px-2 py-1 rounded" />
                 <input v-model="emailInput" class="px-2 py-1 rounded" />
@@ -94,9 +94,9 @@ function cancelEdit() {
                 </div>
             </template>
             <template v-else>
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">{{ name }}</h2>
-                <p class="text-gray-600 dark:text-gray-300">{{ email }}</p>
-                <button @click="isEditing = true" class="mt-4 px-3 py-1 bg-blue-500 text-white rounded">Editar</button>
+                <h2 class="w-full text-xl !font-semibold text-gray-800 dark:text-white">{{ name }}</h2>
+                <p class="w-full text-gray-600 dark:text-gray-300">{{ email }}</p>
+                <button @click="isEditing = true" class="btn btn-primary" >Editar</button>
             </template>
         </div>
     </div>

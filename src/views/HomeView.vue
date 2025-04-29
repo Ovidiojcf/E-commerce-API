@@ -9,12 +9,14 @@ import Category from '@/components/CategoryComponent.vue';
 </script>
 
 <template>
-  <Header></Header>
-  <main>
-    <Hero/>
-    <Category/>
-    <ProductsGridComponent/>
-    <Grid/>
-  </main>
-  <Footer></Footer>
+  <div>
+    <Header></Header>
+    <main>
+      <Hero />
+      <Category />
+      <ProductsGridComponent />
+      <Grid />
+    </main>
+    <Footer></Footer>
+  </div>
 </template>
