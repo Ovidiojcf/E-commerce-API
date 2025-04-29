@@ -4,7 +4,6 @@ import { useCreateCart } from '@/stores/cart';
 import { useFavoritesStore } from '@/stores/favorites';
 import LikeIcon from '@/components/icons/actions/Like.svg';
 import FavoritesIcon from '@/components/icons/actions/Favorites.svg';
-
 //Props devem vir antes de qualquer uso
 const props = defineProps({
   id: Number,
@@ -16,7 +15,6 @@ const props = defineProps({
 
 const cartStore = useCreateCart();
 const favoritesStore = useFavoritesStore();
-
 const isFavorite = computed(() => favoritesStore.isFavorite(props.id));
 
 //Alternar entre favorito ou não

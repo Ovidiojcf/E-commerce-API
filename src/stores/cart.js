@@ -24,16 +24,13 @@ export const useCreateCart = defineStore('cart', () => {
   }
 
   // Inicializa o carrinho do usuário logado ao abrir a aplicação
-  async function initCart() {
+  async function initCart(token) {
     try {
-      const token = useAuthStore().token;
-
       // Somente o usuário logado possui um token
       if (!token) {
         console.warn('Usuário não autenticado. Carrinho não foi carregado');
         return;
       }
-
       const response = await getCart(token);
       updateCartState(response);
     } catch (error) {
@@ -47,7 +44,7 @@ export const useCreateCart = defineStore('cart', () => {
   }
 
   // Adiciona item ao carrinho, verificando se já existe e depois atualiza a store
-  async function addToCart({ productId, quantity, unitPrice }) {
+  async function addToCart({ productId, quantity, unitPrice }, ) {
     try {
       const token = useAuthStore().token;
 
