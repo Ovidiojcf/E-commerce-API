@@ -12,8 +12,8 @@ import Category from '@/components/CategoryComponent.vue';
   <Header></Header>
   <main>
     <Hero/>
-    <ProductsGridComponent/>
     <Category/>
+    <ProductsGridComponent/>
     <Grid/>
   </main>
   <Footer></Footer>
