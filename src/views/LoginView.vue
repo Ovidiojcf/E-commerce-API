@@ -1,5 +1,5 @@
 <script setup>
-import { Login, Register } from '@/services/HttpService';
+import { Login, Register, createCart } from '@/services/HttpService';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -7,7 +7,6 @@ import { useCreateCart } from '@/stores/cart';
 
 const auth = useAuthStore();
 const router = useRouter();
-const cartStore = useCreateCart(); // para criar o carrinho apos o login
 // Estado para controlar qual formulário mostrar
 const isLoginForm = ref(true);
 
@@ -51,8 +50,10 @@ async function enviar() {
         //Fazer login automaticamente após o registro
         const loginResult = await Login({ email: email.value, password: password.value });
         if (loginResult.status === 200) {
-          router.push('/home');
           auth.saveUser(loginResult.data);
+          const cartResult = await createCart(auth.id,auth.token);
+          router.push('/home');
+          return console.log(cartResult, "Carrinho criado com sucesso");
         }
       } else {
         alert('Falha no registro: ' + (result.data?.message || 'Erro desconhecido'));
