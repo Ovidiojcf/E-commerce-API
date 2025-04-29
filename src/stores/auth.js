@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
         cartStore.totalAmount = 0;
     }
 
-    function saveUser(result){
+    async function saveUser(result){
         user.value = result.user;
         token.value = result.token;
         isAuthenticated.value = true;
@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
         cartStore.totalAmount = 0;
 
         //Chamada para inicializar o carrinho automaticamente após login
-        cartStore.initCart(token.value);
+        await cartStore.initCart(token.value, result.user.id);
     }
 
     return { token, user, isAuthenticated, logout, saveUser }
