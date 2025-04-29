@@ -18,11 +18,11 @@ const totalPrice = computed(() => {
 
 <template>
     <div class="grid grid-cols-3 justify-items-stretch">
-        <div class="w-3xs p-4 ">
+        <div class="w-3xs p-4">
             <img class="rounded-xl" :src="item.image" :alt="item.name">
         </div>
         <div class="flex items-center p-4">
-            <span class="!font-bold text-black">UN R$ {{ (item.unit_price ?? 0).toFixed(2) }}</span>
+            <span class="!font-bold text-black">Unit Price: ${{ (item.unit_price ?? 0).toFixed(2) }}</span>
         </div>
         <div class="flex items-center gap-8">
             <div class="flex">
@@ -41,11 +41,11 @@ const totalPrice = computed(() => {
             </div>
 
             <div class="pl-5">
-                <h2 class="!font-bold">R$ {{ totalPrice }}</h2>
+                <h2 class="!font-bold">Total: ${{ totalPrice }}</h2>
             </div>
             <button
-                class="w-auto h-10 flex justify-center text-lg items-center rounded-md bg-indigo-600 px-3 py-3  font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                @click="$emit('remove', item)">Remover
+                class="w-auto h-10 flex justify-center text-lg items-center rounded-md bg-indigo-600 px-3 py-3 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                @click="$emit('remove', item)">Remove
             </button>
         </div>
     </div>
