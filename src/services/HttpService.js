@@ -76,7 +76,8 @@ export async function getProducts() {
         const response = await api.get('/products');
         return response.data;
     } catch (error) {
-        console.error('Erro ao buscar os produtos');
+        console.error('Http error in get products: ',error);
+        throw error;
     }
 }
 
@@ -114,7 +115,7 @@ export async function getCategoties() {
         const response = await api.get('/categories');
         return response.data;
     } catch (error) {
-        console.error('Htto erro in get Categories: ', error)
+        console.error('Htto error in get Categories: ', error)
     }
 }
 
@@ -202,7 +203,7 @@ export async function createAddress(address) {
         return response.data;
     } catch (error) {
         console.error('Http error in create Address: ',error);
-        throw error
+        throw error;
     }
 }
 
@@ -218,7 +219,8 @@ export async function getAddress() {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao buscar os endereços');
+        console.error('Http error in get Address: ',error);
+        throw error;
     }
 }
 
@@ -261,8 +263,8 @@ export async function createCart(userId, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao criar carrinho:', error);
-        throw error
+        console.error('Htttp errror in create Cart', error);
+        throw error;
     }
 }
 
@@ -278,7 +280,8 @@ export async function getCart(token) {
         console.log(response.data);
         return response.data;
     } catch (error) {
-        console.error('Erro ao buscar o carrinho existente');
+        console.error('Http error in get Cart: ',error);
+        throw error;
     }
 }
 
@@ -292,7 +295,8 @@ export async function addItemCart(item, token ) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao adicionar produto no carrinho existente');
+        console.error('Http error in add item to cart: ',error);
+        throw error;
     }
 }
 
@@ -307,7 +311,8 @@ export async function updateItemCart(item, token) {
       
           return response.data;
     } catch (error) {
-        console.error('Erro ao atualizar o produto no carrinho existente');
+        console.error('Http error in update item cart: ',error);
+        throw error;
     }
 }
 
@@ -322,7 +327,8 @@ export async function removeItemCart(Product, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao deletar produto no carrinho existente');
+        console.error('Http error in remove item cart: ',error);
+        throw error;
     }
 }
 
@@ -336,7 +342,8 @@ export async function createOrder(Order,token) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao criar pedido:', error);
+        console.error('Http errror in create Order:', error);
+        throw error;
     }
 }
 
@@ -350,7 +357,7 @@ export async function getOrders(token) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao buscar os pedidos existentes');
+        console.error('Http errror in get Orders:', error);
     }
 }
 
@@ -365,7 +372,7 @@ export async function createCoupon(Coupon, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('http error to create coupom:',error);
+        console.error('Http error to create coupom:',error);
     }
 }
 
@@ -379,11 +386,11 @@ export async function getCoupons(token) {
         });
         return response.data;
     } catch (error) {
-        console.error('Erro ao buscar os cupons existentes');
+        console.error('Http error in get Coupons:', error);
     }
 }
 
-export async function editCoupom(coupomId, coupomData, token) {
+export async function editCoupon(coupomId, coupomData, token) {
     try {
         const response = await api.put(`coupons/${coupomId}`, coupomData, {
             headers:{
@@ -397,7 +404,7 @@ export async function editCoupom(coupomId, coupomData, token) {
     }
 }
 
-export async function deleteCoupom(coupomId, token) {
+export async function deleteCoupon(coupomId, token) {
     try {
         const response = await api.delete(`coupons/${coupomId}`,{
             headers:{
@@ -408,6 +415,7 @@ export async function deleteCoupom(coupomId, token) {
         return response.data;
     } catch (error) {
         console.error('Http error in Delete Coupom:', error);
+        throw error;
     }
 }
 
@@ -421,7 +429,8 @@ export async function createDiscount(discount, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('HTTP error while creating discount:', error);
+        console.error('Http error in create discount:', error);
+        throw error;
     }
 }
 
@@ -435,7 +444,7 @@ export async function getDiscounts(token) {
         });
         return response.data;
     } catch (error) {
-        console.error('HTTP error while fetching discounts:', error);
+        console.error('Http error in get discounts:', error);
     }
 }
 
@@ -449,7 +458,7 @@ export async function editDiscount(discountId, discountData, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('HTTP error while editing discount:', error);
+        console.error('Http error in edit discount:', error);
     }
 }
 
@@ -463,6 +472,6 @@ export async function deleteDiscount(discountId, token) {
         });
         return response.data;
     } catch (error) {
-        console.error('HTTP error while deleting discount:', error);
+        console.error('Http error in delete discount:', error);
     }
 }
