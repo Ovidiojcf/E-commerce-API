@@ -62,11 +62,11 @@ function handleAddToCart() {
       </button>
     </div>
     <!-- <p class="mb-3 font-normal text-black text-justify">{{ description }}</p> -->
-    <button @click="handleAddToCart" class="w-full sm:w-auto flex justify-center text-sm sm:text-lg rounded-md
-         bg-indigo-600 px-3 py-2 sm:px-4 sm:py-3 font-semibold text-white shadow-xs
-         hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2
-         focus-visible:outline-indigo-600">
-      Adicionar
+    <button @click="handleAddToCart" class="mx-auto flex justify-center text-sm sm:text-lg rounded-md
+     bg-indigo-600 px-3 py-2 sm:px-4 sm:py-3 font-semibold text-white shadow-xs
+     hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2
+     focus-visible:outline-indigo-600">
+      Add to Cart
     </button>
 
   </div>
