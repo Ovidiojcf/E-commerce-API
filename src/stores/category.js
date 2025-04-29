@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { createCategory, editCategory, getCategoties } from "@/services/HttpService";
+import { createCategory, editCategory, getCategoties, editCategoryImage } from "@/services/HttpService";
 
 
 export const useCreateCategories = defineStore('categories', () => {
@@ -34,9 +34,13 @@ export const useCreateCategories = defineStore('categories', () => {
         try {
             const categoryData = {
                 name: name.value,
-                description: description.value
+                description: description.value,
+                image: image.value
             };
             const data = await editCategory(id.value, categoryData);
+            if (image.value) {
+                await editCategoryImage(id.value, image.value);
+            }
             return data;
         } catch (error) {
             console.error("Erro ao editar a categoria", JSON.stringify(error.response?.data, null, 2));
