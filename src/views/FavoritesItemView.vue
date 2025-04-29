@@ -24,7 +24,7 @@ const favorites = computed(() => favoritesStore.favorites)
         </div>
 
         <p v-else class="text-center text-gray-500">
-            Nenhum produto favoritado ainda.
+            No favorite products yet
         </p>
     </div>
 </template>
