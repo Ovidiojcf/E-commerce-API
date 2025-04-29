@@ -119,4 +119,15 @@ function clearFile() {
 
     emit("clear");
 }
+
+function setPreviewFromUrl(url) {
+    previewUrl.value = url;
+}
+
+
+defineExpose({
+  clearFile,
+  setPreviewFromUrl
+});
+
 </script>

@@ -1,12 +1,13 @@
 <script setup>
 import FileDrop from './FileDrop.vue';
 import { useCreateCategories, useGetCategories } from '@/stores/category';
-import { onMounted, computed } from 'vue';
-
+import { onMounted, computed , ref} from 'vue';
+import { getImg } from '@/utils/image';
 
 const categories = useCreateCategories();
 const categoriesById = computed(() => store.categoriesById); // Agora sempre reflete a store
 const store = useGetCategories();
+const fileDropRef = ref(null);
 
 
 async function sendProduct() {
@@ -41,25 +42,24 @@ function handleFileUpload(file) {
     }
 }
 
-function clearFile() {
-    categories.name = ('');
-    categories.description = ('');
-}
-function clearImage() {
-    categories.image = null;
-}
 
 function clearForm() {
     categories.id = null; // Resetar ID para nova criação
     categories.name = '';
     categories.description = '';
     categories.image = null;
+    // Limpa preview do componente FileDrop
+    fileDropRef.value?.clearFile();
 }
 // Função para carregar a categoria no formulário ao clicar no botão de edição
 function editCategory(category) {
     console.log("Categoria selecionada para edição:", category)
     categories.setEditCategory(category);
     console.log("ID salvo na store:", categories.id);
+    if (category.image_path && fileDropRef.value) {
+    const imageUrl = getImg(category.image_path);
+    fileDropRef.value.setPreviewFromUrl(imageUrl);
+  }
 }
 
 onMounted(async () => {
@@ -73,11 +73,11 @@ onMounted(async () => {
         <!-- Upload Category's Image -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
             <label class="!font-bold text-lg text-black">Category Image:</label>
-            <FileDrop @upload="handleFileUpload" @clear="clearImage()">
+            <FileDrop ref="fileDropRef"  @upload="handleFileUpload">
             </FileDrop>
             <!-- Botão de Envio -->
             <div class="flex justify-center">
-                <button @click="sendProduct" @clear="clearFile()"
+                <button @click="sendProduct"
                     class="w-auto h-auto flex justify-center text-lg rounded-md bg-indigo-600 px-3 py-3  font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     {{ categories.id ? 'Edit Category' : 'Create Category' }}
                 </button>
@@ -113,7 +113,7 @@ onMounted(async () => {
                     category.description }}</span></h3>
             </div>
             <button @click="editCategory(category)" class="text-blue-500 hover:text-blue-700">
-                ✏️ Edit
+                <img src="@/components/icons/actions/Toedit.svg" alt="">
             </button>
         </div>
     </section>
