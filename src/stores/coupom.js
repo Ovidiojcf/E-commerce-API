@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { createCoupon, getCoupons, editCoupom } from "@/services/HttpService";
+import { createCoupon, getCoupons, editCoupon } from "@/services/HttpService";
 import { useAuthStore } from "@/stores/auth";
 
 export const useCreateCoupom = defineStore('coupom', () => {
@@ -37,7 +37,7 @@ export const useCreateCoupom = defineStore('coupom', () => {
             start_date: coupomStartDate.value,
             end_date: coupomEndDate.value,
           };
-          const result = await editCoupom(id.value, couponData, token);
+          const result = await editCoupon(id.value, couponData, token);
           return result;
         } catch (error) {
           console.error("Erro ao editar cupom:", error);
