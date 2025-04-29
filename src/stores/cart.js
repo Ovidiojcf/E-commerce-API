@@ -24,19 +24,27 @@ export const useCreateCart = defineStore('cart', () => {
   }
 
   // Inicializa o carrinho do usuário logado ao abrir a aplicação
-  async function initCart(token) {
+  async function initCart(token, userId) {
     try {
-      // Somente o usuário logado possui um token
       if (!token) {
         console.warn('Usuário não autenticado. Carrinho não foi carregado');
         return;
       }
-      const response = await getCart(token);
+      const response = await getCart(token); // Aqui só usa token, sem userId
       updateCartState(response);
     } catch (error) {
       console.error("Erro ao inicializar o carrinho:", error);
+      // Se der erro ao buscar carrinho, cria um novo carrinho com userId
+      if (userId) {
+        try {
+          await createCart(userId, token);
+        } catch (createError) {
+          console.error("Erro ao criar novo carrinho:", createError);
+        }
+      }
     }
   }
+  
 
   // Permite definir os itens manualmente, se necessário
   function setCartItems(items) {
