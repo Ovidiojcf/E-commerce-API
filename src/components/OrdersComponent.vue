@@ -4,9 +4,15 @@ import { useCreateOrder } from '@/stores/order';
 
 const orderStore = useCreateOrder();
 
+const statusOptions = ['PENDING', 'PROCESSING', 'SHIPPED', 'COMPLETED', 'CANCELED'];
+
 onMounted(async () => {
   await orderStore.getOrdersStore();
 });
+
+const updateStatus = async (orderId, newStatus) => {
+  await orderStore.editOrderStatusStore(orderId, newStatus);
+};
 </script>
 
 <template>
@@ -27,7 +33,16 @@ onMounted(async () => {
         <h3 class="!font-bold text-sm text-black">ID do Pedido:
           <span class="!font-semibold text-gray-800">{{ order.id }}</span>
         </h3>
-        <span class="text-sm text-purple-700 font-semibold uppercase">{{ order.status }}</span>
+
+        <select
+          :value="order.status"
+          @change="updateStatus(order.id, $event.target.value)"
+          class="text-sm bg-white border border-gray-300 rounded px-2 py-1 text-purple-700 font-semibold uppercase"
+        >
+          <option v-for="status in statusOptions" :key="status" :value="status">
+            {{ status }}
+          </option>
+        </select>
       </div>
 
       <p class="text-sm text-gray-700">
@@ -38,7 +53,7 @@ onMounted(async () => {
       <p class="text-sm text-gray-700" v-if="order.products && order.products.length > 0">
         <strong class="text-black">Produtos:</strong>
       </p>
-      <ul v-if="order.products && order.products.length > 0" class="ml-4  text-sm text-gray-800">
+      <ul v-if="order.products && order.products.length > 0" class="ml-4 text-sm text-gray-800">
         <li v-for="product in order.products" :key="product.name">
           {{ product.name }} – R$ {{ product.price }}
         </li>
