@@ -379,7 +379,21 @@ export async function createOrder(Order,token) {
     }
 }
 
-export async function getOrders(token) {
+export async function getOrdersByAdmin(token) {
+    try {
+        const response = await api.get('/orders/all/7', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http errror in get Orders:', error);
+    }
+}
+
+export async function getOrdersByUser(token) {
     try {
         const response = await api.get('/orders', {
             headers:{
