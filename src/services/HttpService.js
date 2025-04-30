@@ -26,6 +26,21 @@ export async function Register(payload) {
     }
 }
 
+export async function createUserModerador(userData, token) {
+    try {
+        const response = await api.post('users/create-moderator', userData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in create User Moderador', error);
+        throw error;
+    }
+}
+
 export async function getUser(token) {
     try {
         const response = await api.get('users/me', {

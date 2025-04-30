@@ -5,6 +5,7 @@ import PostCategories from '@/components/PostCategories.vue';
 import PostCoupom from '@/components/PostCoupom.vue';
 import PostDiscounts from '@/components/PostDiscounts.vue';
 import OrdersComponent from '@/components/OrdersComponent.vue';
+import PostModerator from '@/components/PostModerator.vue';
 import { ref } from 'vue';
 
 // Estado da aba ativa
@@ -17,6 +18,7 @@ const tabs = [
     { id: 3, label: "Discount" },
     { id: 4, label: "Coupons" },
     { id: 5, label: "Orders" },
+    { id: 6, label: "Users" },
 
 ];
 </script>
@@ -49,6 +51,9 @@ const tabs = [
             </div>
             <div v-if="activeTab === 5">
                 <OrdersComponent />
+            </div>
+            <div v-bind:class="6">
+                <PostModerator />
             </div>
         </div>
     </main>
