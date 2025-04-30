@@ -407,6 +407,22 @@ export async function getOrdersByUser(token) {
     }
 }
 
+export async function editStatusOrder(orderId, status, token) {
+    try {
+        const response = await api.put(`/orders/${orderId}`, {status}, {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in edit status order:', error);
+        throw error;
+        
+    }
+}
+
 
 export async function createCoupon(Coupon, token) {
     try {
