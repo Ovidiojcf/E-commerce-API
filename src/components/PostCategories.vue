@@ -1,8 +1,8 @@
 <script setup>
 import FileDrop from './FileDrop.vue';
-import { useCreateCategories, useGetCategories } from '@/stores/category';
-import { onMounted, computed , ref} from 'vue';
 import { getImg } from '@/utils/image';
+import { useCreateCategories, useGetCategories } from '@/stores/category';
+import { onMounted, computed, ref } from 'vue';
 
 const categories = useCreateCategories();
 const categoriesById = computed(() => store.categoriesById); // Agora sempre reflete a store
@@ -57,9 +57,9 @@ function editCategory(category) {
     categories.setEditCategory(category);
     console.log("ID salvo na store:", categories.id);
     if (category.image_path && fileDropRef.value) {
-    const imageUrl = getImg(category.image_path);
-    fileDropRef.value.setPreviewFromUrl(imageUrl);
-  }
+        const imageUrl = getImg(category.image_path);
+        fileDropRef.value.setPreviewFromUrl(imageUrl);
+    }
 }
 
 onMounted(async () => {
@@ -73,7 +73,7 @@ onMounted(async () => {
         <!-- Upload Category's Image -->
         <div class="flex flex-col gap-4 w-full max-w-sm">
             <label class="!font-bold text-lg text-black">Category Image:</label>
-            <FileDrop ref="fileDropRef"  @upload="handleFileUpload">
+            <FileDrop ref="fileDropRef" @upload="handleFileUpload">
             </FileDrop>
             <!-- Botão de Envio -->
             <div class="flex justify-center">
