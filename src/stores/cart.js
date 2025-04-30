@@ -73,7 +73,7 @@ export const useCreateCart = defineStore('cart', () => {
       const response = await getCart(token);
       updateCartState(response);
     } catch (error) {
-      console.error('Erro ao adicionar item ao carrinho:', error);
+      console.error('Error to add item in cartStore:', error);
     }
   }
 
@@ -114,6 +114,13 @@ export const useCreateCart = defineStore('cart', () => {
         updateCartState(response);
     }
   }
+  function clearCart() {
+    cartId.value = null;
+    cartItems.value = [];
+    totalAmount.value = 0;
+    localStorage.removeItem("cartId");
+    console.log("Cart has been cleared.");
+}
 
   return {
     cartId,
@@ -124,7 +131,8 @@ export const useCreateCart = defineStore('cart', () => {
     addToCart,
     removeFromCart,
     incrementItemQuantity,
-    decrementItemQuantity
+    decrementItemQuantity,
+    clearCart
   };
 }, {
   persist: true,
