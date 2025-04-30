@@ -103,7 +103,8 @@ async function submitOrder() {
         const response = await orderStore.createOrderSubmit(orderData);
         alert('Order placed successfully!');
         console.log('Order created:', response);
-        await cartStore.initCart();
+        // Clear the cart after placing the order
+        cartStore.clearCart();
         clearCartInputs();
     } catch (error) {
         console.error('Error placing the order:', error);
