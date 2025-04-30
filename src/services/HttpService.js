@@ -73,7 +73,7 @@ export async function editUser(userData, token) {
 
 export async function getProducts() {
     try {
-        const response = await api.get('/products');
+        const response = await api.get('/products/user/7');
         return response.data;
     } catch (error) {
         console.error('Http error in get products: ',error);
@@ -112,7 +112,7 @@ export async function createProduct(product) {
 
 export async function getCategoties() {
     try {
-        const response = await api.get('/categories');
+        const response = await api.get('/categories/user/7');
         return response.data;
     } catch (error) {
         console.error('Htto error in get Categories: ', error)

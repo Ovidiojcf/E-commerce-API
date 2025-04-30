@@ -27,18 +27,16 @@ function toggleForm() {
 async function enviar() {
   try {
     if (isLoginForm.value) {
-      // Lógica de login (já implementada)
       const result = await Login({ email: email.value, password: password.value });
 
       if (result.status === 200) {
-        alert('Login sucesso');
+        alert('Login successful');
         auth.saveUser(result.data);
         router.push('/home');
       } else {
-        alert('Login falhou');
+        alert('Login failed');
       }
     } else {
-      // Lógica de registro
       const result = await Register({
         name: name.value,
         email: email.value,
@@ -46,22 +44,21 @@ async function enviar() {
       });
 
       if (result.status === 201 || result.status === 200) {
-        alert('Registro realizado com sucesso!');
-        //Fazer login automaticamente após o registro
+        alert('Registration successful!');
         const loginResult = await Login({ email: email.value, password: password.value });
         if (loginResult.status === 200) {
           auth.saveUser(loginResult.data);
-          const cartResult = await createCart(auth.id,auth.token);
+          const cartResult = await createCart(auth.id, auth.token);
           router.push('/home');
-          return console.log(cartResult, "Carrinho criado com sucesso");
+          return console.log(cartResult, "Cart created successfully");
         }
       } else {
-        alert('Falha no registro: ' + (result.data?.message || 'Erro desconhecido'));
+        alert('Registration failed: ' + (result.data?.message || 'Unknown error'));
       }
     }
   } catch (error) {
-    console.error('Erro:', error);
-    alert('Ocorreu um erro: ' + (error.message || 'Erro desconhecido'));
+    console.error('Error:', error);
+    alert('An error occurred: ' + (error.message || 'Unknown error'));
   }
 }
 </script>

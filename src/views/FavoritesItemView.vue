@@ -13,7 +13,7 @@ const favorites = computed(() => favoritesStore.favorites)
     <Header />
 
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-6">Meus Favoritos</h1>
+        <h1 class="text-2xl font-bold mb-6">My Favorites</h1>
 
         <div v-if="favorites.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div v-for="product in favorites" :key="product.id" class="relative">
