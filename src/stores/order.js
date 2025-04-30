@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { createOrder, getOrdersByAdmin } from '@/services/HttpService'; // Corrigido para a função certa
+import { createOrder, getOrdersByAdmin, editStatusOrder  } from '@/services/HttpService'; // Corrigido para a função certa
 import { useAuthStore } from '@/stores/auth';
 
 export const useCreateOrder = defineStore('orders', () => {
@@ -30,12 +30,24 @@ export const useCreateOrder = defineStore('orders', () => {
         }
     };
 
+    async function editOrderStatusStore(orderId, newStatus) {
+        console.log(`Alterando status do pedido ${orderId} para ${newStatus}`);
+        try {
+            await editStatusOrder(orderId, newStatus, token);
+            console.log(`Status do pedido ${orderId} atualizado com sucesso`);
+            await getOrdersStore(); // Atualiza a lista após mudança
+        } catch (error) {
+            console.error('Erro ao editar status do pedido:', error);
+        }
+    }
+
     return {
         address,
         coupom,
         order,
         orders, 
         createOrderSubmit,
-        getOrdersStore
+        getOrdersStore,
+        editOrderStatusStore
     }
 });
