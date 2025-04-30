@@ -110,6 +110,38 @@ export async function createProduct(product) {
     
 }
 
+export async function editProduct(productId, productData, token) {
+    try {
+        const response = await api.put(`products/${productId}`, productData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in edit Product Fields: ',error);
+        throw error;
+    }
+}
+
+export async function editProductImage(productId, imageFile, token) {
+    try {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        const response = await api.put(`products/${productId}/image`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Http error in edit Product Image: ',error);
+        throw error;   
+    }
+}
+
 export async function getCategoties() {
     try {
         const response = await api.get('/categories/user/7');
