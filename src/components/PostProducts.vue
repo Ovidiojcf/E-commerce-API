@@ -43,7 +43,9 @@ function clearFile() {
 }
 function clearImage() {
     products.image = null;
-    imagePreviewUrl.value = null;
+    if (fileDropRef.value) {
+        fileDropRef.value.clearFile();
+    }
 }
 
 function editProduct(product) {
