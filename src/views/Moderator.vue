@@ -6,10 +6,12 @@ import PostCoupom from '@/components/PostCoupom.vue';
 import PostDiscounts from '@/components/PostDiscounts.vue';
 import OrdersComponent from '@/components/OrdersComponent.vue';
 import PostModerator from '@/components/PostModerator.vue';
-import { ref } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+import { ref, computed} from 'vue';
 
 // Estado da aba ativa
 const activeTab = ref(1);
+const auth = useAuthStore();
 
 // Lista de abas
 const tabs = [
@@ -18,9 +20,16 @@ const tabs = [
     { id: 3, label: "Discount" },
     { id: 4, label: "Coupons" },
     { id: 5, label: "Orders" },
-    { id: 6, label: "Users" },
+    { id: 6, label: "Users" , adminOnly: true},
 
 ];
+
+const visibleTabs = computed(() => {
+    return tabs.filter(tab => {
+        return !(tab.adminOnly && auth.user?.role !== 'ADMIN');
+    });
+});
+
 </script>
 
 <template>
@@ -28,7 +37,7 @@ const tabs = [
         <Header></Header>
         <!--Tabs Here-->
         <div class="flex border-b">
-            <button v-for="tab in tabs" key="tab.id" @click="activeTab = tab.id"
+            <button v-for="tab in visibleTabs" key="tab.id" @click="activeTab = tab.id"
                 class="flex-1 py-2 text-center border-b-2 transition-colors duration-300"
                 :class="activeTab === tab.id ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'">
                 {{ tab.label }}
@@ -52,7 +61,7 @@ const tabs = [
             <div v-if="activeTab === 5">
                 <OrdersComponent />
             </div>
-            <div v-bind:class="6">
+            <div v-if="activeTab === 6 && auth.user?.role == 'ADMIN'">
                 <PostModerator />
             </div>
         </div>

@@ -10,27 +10,27 @@ const store = useModeratorStore();
 async function handleSubmit() {
     const result = await store.createModerator({ name: name.value, email: email.value, password: password.value });
     if (result) {
-        alert('Moderador criado com sucesso');
+        alert('Moderator User Created Successfully');
         name.value = '';
         email.value = '';
         password.value = '';
     } else {
-        alert('Erro ao criar moderador');
+        alert('Error creating moderator user');
     }
 }
 </script>
 
 <template>
     <div class="p-8 flex flex-col gap-4">
-        <h2 class="text-xl font-bold text-gray-700">Criar Moderador</h2>
+        <h2 class="text-xl font-bold text-gray-700">Create Moderator</h2>
 
-        <input v-model="name" type="text" placeholder="Nome"
+        <input v-model="name" type="text" placeholder="Name"
             class="border rounded px-3 py-2 focus:outline-none focus:ring w-full max-w-md" />
 
         <input v-model="email" type="email" placeholder="Email"
             class="border rounded px-3 py-2 focus:outline-none focus:ring w-full max-w-md" />
 
-        <input v-model="password" type="password" placeholder="Senha"
+        <input v-model="password" type="password" placeholder="Password"
             class="border rounded px-3 py-2 focus:outline-none focus:ring w-full max-w-md" />
 
         <button @click="handleSubmit"

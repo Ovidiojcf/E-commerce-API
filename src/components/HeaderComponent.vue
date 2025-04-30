@@ -26,6 +26,11 @@ const handleSearch = () => {
     }
 };
 
+function handleLogout() {
+    auth.logout();
+    router.push('/home');
+}
+
 
 // Adiciona e remove o event listener corretamente
 onMounted(() => {
@@ -105,7 +110,7 @@ onUnmounted(() => {
                                     <a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                                 </li>
                                 <li>
-                                    <a v-if="auth.user?.role == 'ADMIN'" href="/moderator"
+                                    <a v-if="auth.user?.role == 'ADMIN' || auth.user?.role == 'MODERATOR' " href="/moderator"
                                         class="block px-4 py-2 hover:bg-gray-100">Moderator</a>
                                 </li>
                                 <li>
@@ -113,7 +118,7 @@ onUnmounted(() => {
                                             class="block px-4 py-2 hover:bg-gray-100">Login</a></router-link>
                                 </li>
                                 <li v-if="auth.user && Object.keys(auth.user).length">
-                                    <button @click="auth.logout"
+                                    <button @click="handleLogout" 
                                         class="block px-4 py-2 hover:bg-red-100 text-red-600">Logout</button>
                                 </li>
                             </ul>

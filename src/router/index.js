@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
   const auth = useAuthStore();
 
   if (to.meta.requiresAdmin) {
-    if (!auth.isAuthenticated || auth.user.role !== 'ADMIN') {
+    if (!auth.isAuthenticated || (auth.user.role !== 'ADMIN' && auth.user.role !== 'MODERATOR')) {
       next({ path: '/access-denied' });
     } else {
       next();

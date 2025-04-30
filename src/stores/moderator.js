@@ -11,10 +11,10 @@ export const useModeratorStore = defineStore('moderator', {
                 const auth = useAuthStore();
                 const token = auth.token;
                 const result = await createUserModerador({ ...userData, role: 'MODERATOR' }, token);
-                console.log("Moderador criado com sucesso", result);
+                console.log("Moderator created successfull", result);
                 return result;
             } catch (err) {
-                console.error('Erro ao criar moderador:', err);
+                console.error('Erro to creatre moderator user:', err);
                 return null;
             }
         }
