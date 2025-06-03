@@ -2,7 +2,7 @@
 
 Projeto de e-commerce construído com Vue 3, Vite e Pinia, focado em performance, organização de código e boas práticas no consumo de APIs REST.
 
-Este projeto está em desenvolvimento, com o objetivo de demonstrar habilidades práticas em construção de componentes reutilizáveis, controle de estado com Pinia e integração com endpoints seguros usando autenticação via token.
+Este projeto foi desenvolvido com o objetivo de demonstrar habilidades práticas em construção de componentes reutilizáveis, controle de estado com Pinia e integração com endpoints seguros usando autenticação via token.
 
 ## ✨ Tecnologias & Conceitos Aplicados
 Vue 3 com Composition API
